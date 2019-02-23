@@ -1,6 +1,6 @@
 package L;
 
-public class L1 {
+public class L_1 {
 
     public int[] twoSum(int[] nums, int target) {
         int[] answer = new int[2];
@@ -27,7 +27,7 @@ public class L1 {
     }
 
     public static void main(String[] args) {
-        L1 l1 = new L1();
+        L_1 l1 = new L_1();
         l1.twoSum(new int[]{2, 7, 11, 15}, 9);
 
     }
