@@ -1,6 +1,8 @@
+package L;
+
 import java.util.ArrayList;
 
-public class Leet_942 {
+public class L_942 {
 
 
     public int[] diStringMatch(String S) {

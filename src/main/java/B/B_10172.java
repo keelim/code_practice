@@ -1,3 +1,5 @@
+package B;
+
 public class B_10172 {
     public static void main(String[] args) {
         System.out.println("|\\_/|");

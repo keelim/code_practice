@@ -1,6 +1,8 @@
+package L;
+
 import java.util.ArrayList;
 
-public class Leet_922 {
+public class L_922 {
     ArrayList<Integer> even = new ArrayList<>();
     ArrayList<Integer> odd = new ArrayList<>();
     ArrayList<Integer> answer = new ArrayList<>();

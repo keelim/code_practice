@@ -1,7 +1,9 @@
+package L;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 
-public class Leet_169 {
+public class L_169 {
     public int majorityElement(int[] nums) {
         ArrayList<Integer> arrayList = new ArrayList<>();
         ArrayList<Integer> temp1 = new ArrayList<>();

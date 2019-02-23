@@ -1,25 +1,24 @@
-import java.io.*;
-import java.util.*;
+package B;
 
-public class baek_10989 {
+import java.io.*;
+
+public class B_15552 {
     public static void main(String[] args) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(System.out));
-        ArrayList<String> list = new ArrayList();
 
-        int count, nums = 0;
+        int count, first, second = 0;
+        String a;
         count = Integer.parseInt(reader.readLine());
 
         for (int i = 0; i < count; i++) {
-            nums = Integer.parseInt(reader.readLine());
-            list.add(String.valueOf(nums));
-        }
-        Collections.sort(list);
-        for (int i = 0; i <list.size(); i++) {
-            writer.write(list.get(i));
+            a = reader.readLine();
+            first = Integer.parseInt(a.split(" ")[0]);
+            second = Integer.parseInt(a.split(" ")[1]);
+
+            writer.write(String.valueOf(first + second)+"\n");
         }
         writer.flush();
-        String a = "3";
 
     }
 }
