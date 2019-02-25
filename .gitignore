@@ -164,7 +164,7 @@ gradle-app.setting
 
 # # Work around https://youtrack.jetbrains.com/issue/IDEA-116898
 # gradle/wrapper/gradle-wrapper.properties
-
+.idea
 .gradle/4.10/vcsMetadata-1/
 src/main/resources/
 src/test/
