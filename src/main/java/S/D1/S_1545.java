@@ -1,4 +1,4 @@
-package S;
+package S.D1;
 
 import java.util.Scanner;
 

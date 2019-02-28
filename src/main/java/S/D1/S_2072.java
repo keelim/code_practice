@@ -1,11 +1,12 @@
-package S;
+package S.D1;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class S_2071 {
+public class S_2072 {
+
     public static void main(String[] args) {
-        int Sum = 0;
+
         Scanner sc = new Scanner(System.in);
         int test_case = Integer.parseInt(sc.nextLine());
         for (int t = 1; t <= test_case; t++) {
@@ -13,16 +14,16 @@ public class S_2071 {
             String[] temp = sc.nextLine().split(" ");
             for (String s : temp) {
                 int change_s = Integer.parseInt(s);
-                arrayList.add(change_s);
+                if (change_s % 2 != 0) {
+                    arrayList.add((change_s));
+                }
+
             }
-            for (int a : arrayList)
-                Sum += a;
-
-            float a = (float) Sum / (float) arrayList.size();
-
-            System.out.println("#" + t + " " + Math.round(a*10/10.0));
-
-            Sum = 0;
+            int odd_sum=0;
+            for ( int a: arrayList){
+                odd_sum+=a;
+            }
+            System.out.println("#"+t+" " + odd_sum);
 
         }
 
