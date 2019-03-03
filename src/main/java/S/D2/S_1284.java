@@ -13,8 +13,7 @@ public class S_1284 {
             int answer = 0;
             ArrayList<Integer> list = new ArrayList<>();
 
-            for (String s : sc.nextLine().split(" "))
-                list.add(Integer.parseInt(s));
+            goList(sc, list);
 
             int p_a_charge, q_b_basic, r_b_statndard, s_b_overcharge, w_use, a_cost, b_cost;
             p_a_charge = list.get(0);
@@ -24,14 +23,31 @@ public class S_1284 {
             w_use = list.get(4);
             a_cost = p_a_charge * w_use;
 
-            if(w_use<=r_b_statndard)
-                b_cost = q_b_basic;
-            else
-                b_cost = q_b_basic + (w_use-r_b_statndard)*s_b_overcharge;
-
-            answer = (a_cost>b_cost) ? b_cost:a_cost;
+            answer = getAnswerfFnale(q_b_basic, r_b_statndard, s_b_overcharge, w_use, a_cost);
 
             System.out.println("#" + t + " " + answer);
         }
+    }
+
+    private static int getAnswerfFnale(int q_b_basic, int r_b_statndard, int s_b_overcharge, int w_use, int a_cost) {
+        int b_cost;
+        int answer;
+        b_cost = getAnswer(q_b_basic, r_b_statndard, s_b_overcharge, w_use);
+        answer = (a_cost > b_cost) ? b_cost : a_cost;
+        return answer;
+    }
+
+    private static int getAnswer(int q_b_basic, int r_b_statndard, int s_b_overcharge, int w_use) {
+        int b_cost;
+        if (w_use <= r_b_statndard)
+            b_cost = q_b_basic;
+        else
+            b_cost = q_b_basic + (w_use - r_b_statndard) * s_b_overcharge;
+        return b_cost;
+    }
+
+    private static void goList(Scanner sc, ArrayList<Integer> list) {
+        for (String s : sc.nextLine().split(" "))
+            list.add(Integer.parseInt(s));
     }
 }
