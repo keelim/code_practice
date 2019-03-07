@@ -10,7 +10,7 @@ public class B_11718 {
             String a = sc.nextLine();
             System.out.println(a);
 
-            
+
         }
     }
 
