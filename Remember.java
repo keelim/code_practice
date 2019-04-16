@@ -178,3 +178,28 @@ private class ListIterator<E> implements iterator{
         }
     }
 }
+
+//max //factorial //recursive max()
+
+void quickSort(int[] a, int left, int right){
+    if(left <right){
+        int mid = partition(a, left, right);
+        quickSort(a, left, mid-1);
+        quickSort(a, mid, right);
+    }
+}
+
+int partion(int[], int right, int left){
+    int pivot = a[left] //아무거나 생성
+    int toRight = left;
+    int toLeft = right+1; //--를 바로 진행하기 때문에
+    do {
+        do{toRight++} while(a[toRight]<pivot);
+        do{toLeft--} while(a[toLeft]>pivot);
+        if(toRight<toLeft){
+            swap(int, a[toRight], a[toLeft]);
+        }
+    } while (toRight<toLeft);// 서로 교차하면
+    swap(int, a[left], pivot)
+    return toLeft;
+}
