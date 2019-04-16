@@ -13,17 +13,17 @@ public Element pop(){
     Element pop = null;
 
     if(!this.isEmpty()){
-        Element pop = this._elements[top];
-        this._elements[top] = null;
-        this._top--;
-        return pop;
+         pop = this._elements[top]; //top 에 있는 것을 꺼낸다.
+        this._elements[top] = null; //top을 null 로 만든다. 
+        this._top--; //top의 크기를 줄인다. 
     }
+    return pop;
 }
 
 public Element peek(){
     Element peek = null; //리턴할 엘리먼트 생성
     if(!isEmpty()){
-        peek = this._elements[top];
+        peek = this._elements[top]; //top에 있는 것을 참조한다. 
     }
     return peek;
 }
@@ -40,8 +40,7 @@ private void resize(){
 }
 
 ArrayList _size, _capacity, _elements
-l
-ArrayList 
+
 public boolean addTo(Element anElement, int anOrder){
     if(isFull()){
         return false;
@@ -54,8 +53,8 @@ public boolean addTo(Element anElement, int anOrder){
     }
 }
 
-private void  makeRoomAt(int aPosition){     //todo
-    for(int i = this.size();i>aPosition ;i--){
+private void  makeRoomAt(int aPosition){     
+    for(int i = this.size();i>aPosition ;i--){ //줄여나가면서 채운다. 
         this._elements[i] = this._elements[i-1];
     }
 
@@ -96,55 +95,52 @@ public boolean addTo(Element anElement, int anOrder){
                 prev = prev.next();
             }
             nodeForAdd.setNext(prev.next());
-            prev.setNext(nodeForAdd);
         }
-        this._size++;
-        return true;
+        prev.setNext(nodeForAdd);this._size++;
+            return true;
     }
 }
 
-public Element removeFrom(int anOrder){
-    if(!this.anElementDoesExitAt(anOrder)){
+public Element removedFrom(int anOrder){
+    if(anOrder <0 || anOrder>this.size()){
+     return null;
+    } else if(isEmpty()){
         return null;
-    } else {
-        Node<T> removed = null;
-
+    } else{
+        Node temp = null;
         if(anOrder == 0){
-            removed = this.head();
-            this.setHead() = this.head().next();
-        } else{
-            Node<T> prev = this.head();
-            for(int i=1; i< anOrder; i++){
+            temp = this.head();
+            this.setHead(temp.next());
+        } else {
+            Node prev = this.head();
+            for (int i = 1; i < anOrder; i++) {
                 prev = prev.next();
             }
-            removed = prev.next();
-            prev.setNext(removed.next());
+            temp = prev.next();
+            prev.setNext(temp.next());
         }
-        this._size--;
-        return removed;
+        this.setSize(this.size()-1);
+        return temp;
     }
 }
 
-
 //ArrayIterator
-
 public ListIterator iterator(){
     return new ListIterator();
 }
-
 
 private ListIterator<E> implements iterator{
     private Node<E> nextNode;
 
     public ListIterator() {
-        nextNode = this.head();
+        nextNode = LinkedList.head();
     }
 
     public boolean hasNext(){
         return (this._nextNode != null);
     }
 
-    public Element next(){
+    public Element next(){ //수정 필요
         if(this._nextNode == null){
             return null;
         } else {
@@ -168,11 +164,11 @@ private class ListIterator<E> implements iterator{
     }
 
     public boolean hasNext(){
-        return (this._element[_nextPosition] < ArrayList.this.size());
+        return (this._element[_nextPosition] < ArrayList.size()); //내부 클래스 접근이기 떄문ㅔ
     }
 
     public E next(){
-        if(this._nextPosition == ArrayList.this.size()){
+        if(this._nextPosition == ArrayList.size()){
             return null;
         } else{
             T nextElement = ArrayList._element[_nextPosition];
@@ -182,5 +178,3 @@ private class ListIterator<E> implements iterator{
         }
     }
 }
-
-bbbb
