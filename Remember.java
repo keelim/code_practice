@@ -60,8 +60,8 @@ private void  makeRoomAt(int aPosition){
 
 }
 
-public Element removeFrom(int anOrder){
-    Element removed = null;
+public E removeFrom(int anOrder){
+    E removed = null;
     if(!isEmpty()){
         removed = this._elements[anOrder];
         this.removeGapAt(anOrder);
@@ -86,7 +86,7 @@ public boolean addTo(Element anElement, int anOrder){
         return false;
     } else {
         Node<E> nodeForAdd = newNode<>(Element, null);
-        if(anOrder == 0){
+        if(anOrder == 0){ //LinkedList 는 0이 Boundary condition
             nodeForAdd.setNext() = this.head();
             this.setHead(nodeForAdd);
         } else {
@@ -101,14 +101,14 @@ public boolean addTo(Element anElement, int anOrder){
     }
 }
 
-public Element removedFrom(int anOrder){
+public E removedFrom(int anOrder){
     if(anOrder <0 || anOrder>this.size()){
      return null;
     } else if(isEmpty()){
         return null;
     } else{
         Node temp = null;
-        if(anOrder == 0){
+        if(anOrder == 0){ //Boundary Condition
             temp = this.head();
             this.setHead(temp.next());
         } else {
@@ -140,7 +140,7 @@ private ListIterator<E> implements iterator{
         return (this._nextNode != null);
     }
 
-    public Element next(){ //수정 필요
+    public E next(){ //수정 필요
         if(this._nextNode == null){
             return null;
         } else {
@@ -185,11 +185,11 @@ void quickSort(int[] a, int left, int right){
     if(left <right){
         int mid = partition(a, left, right);
         quickSort(a, left, mid-1);
-        quickSort(a, mid, right);
+        quickSort(a, mid+1, right);
     }
 }
 
-int partion(int[], int right, int left){
+int partion(int[] a, int right, int left){
     int pivot = a[left] //아무거나 생성
     int toRight = left;
     int toLeft = right+1; //--를 바로 진행하기 때문에
@@ -202,4 +202,64 @@ int partion(int[], int right, int left){
     } while (toRight<toLeft);// 서로 교차하면
     swap(int, a[left], pivot)
     return toLeft;
+}
+
+public int fact(int n){
+    if(n==1){
+        return 1;
+    } else {
+        return n*fact(n-1);
+    }
+}
+
+public int findMax(int[] a, int left, int right){
+    int maxOfPart;
+    if(left == right){ //초항
+        return a[left];
+    } else {
+        maxOfPart = findMax(a, left+1, right);
+        if(a[left] > = maxOfPart){
+            return a[left];
+        } else {
+            return maxOfPart;
+        }
+    } 
+}
+
+public int findMax(int[] a, int left, int right){
+    int culLoc, max;
+    max = a[left];
+    curLoc = left+1;
+    while(culLoc<=right){
+        if(max<A[curLoc]){
+            max = A[curLoc];
+        }
+        curLoc++;
+    }
+    return max;
+}
+
+public void printlnReverse(char[] s, int from){
+    if(from <s.length){
+        printlnRevere(s, from+1);
+        System.out.println(s[from]);
+    }
+}
+
+public int findmax2(int[] A, int left, int right){
+    int maxOfleft;
+    int maxOfright;
+    if(left == right){
+        return a[left];
+    } else{
+        int mid = (right+left)/2;
+        maxOfleft = findmax2(A, left, mid);
+        maxOfright = findmax(A, mid+1, right);
+        if(maxOfleft >maxOfright){
+            return maxOfleft;
+        } else {
+            return maxOfright;
+        }
+    }
+    
 }
