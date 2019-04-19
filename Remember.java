@@ -13,7 +13,7 @@ public Element pop(){
     Element pop = null;
 
     if(!this.isEmpty()){
-         pop = this._elements[top]; //top 에 있는 것을 꺼낸다.
+        pop = this._elements[top]; //top 에 있는 것을 꺼낸다.
         this._elements[top] = null; //top을 null 로 만든다. 
         this._top--; //top의 크기를 줄인다. 
     }
@@ -79,6 +79,7 @@ private void removeGapAt(int aPosition){ //todo
 //LinkedList
 Node _element, next
 LinekdList size, head
+
 public boolean addTo(Element anElement, int anOrder){
     if(anOrder < 0 || (anOrder > this.size())){
         return false;
@@ -87,13 +88,16 @@ public boolean addTo(Element anElement, int anOrder){
     } else {
         Node<E> nodeForAdd = newNode<>(Element, null);
         if(anOrder == 0){ //LinkedList 는 0이 Boundary condition
+            
             nodeForAdd.setNext() = this.head();
             this.setHead(nodeForAdd);
         } else {
+
             Node<E> prev = this.head();
             for(int i=1; i<anOrder; i++){
                 prev = prev.next();
             }
+            
             nodeForAdd.setNext(prev.next());
         }
         prev.setNext(nodeForAdd);this._size++;
@@ -124,12 +128,12 @@ public E removedFrom(int anOrder){
     }
 }
 
-//ArrayIterator
-public ListIterator iterator(){
+//LinkedList Iterator
+public ListIterator iterator(){ 
     return new ListIterator();
 }
 
-private ListIterator<E> implements iterator{
+private ListIterator<E> implements iterator{ //iterator를 implements 를 한다. 
     private Node<E> nextNode;
 
     public ListIterator() {
@@ -226,7 +230,7 @@ public int findMax(int[] a, int left, int right){
     } 
 }
 
-public int findMax(int[] a, int left, int right){
+public int findMax(int[] a, int left, int right){ //재귀적이지 않는 최대값찾기
     int culLoc, max;
     max = a[left];
     curLoc = left+1;
@@ -237,13 +241,6 @@ public int findMax(int[] a, int left, int right){
         curLoc++;
     }
     return max;
-}
-
-public void printlnReverse(char[] s, int from){
-    if(from <s.length){
-        printlnRevere(s, from+1);
-        System.out.println(s[from]);
-    }
 }
 
 public int findmax2(int[] A, int left, int right){
@@ -261,5 +258,10 @@ public int findmax2(int[] A, int left, int right){
             return maxOfright;
         }
     }
-    
+
+public void printlnReverse(char[] s, int from){
+    if(from <s.length){
+        printlnRevere(s, from+1);
+        System.out.println(s[from]);
+    }
 }
