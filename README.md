@@ -46,4 +46,16 @@
     -  너비 우선 탐색
     -  모든 경로 동시 진행
     - 가중치 없는 그래프
-    
+
+## 2019 04 20
+1. 자료구조 특이 코드 확인    
+    - Objects
+    - ArrayBag
+    - LinkedBag
+    - Set
+    - List
+    - ListIterator hasNext, next
+    - Recursion 
+    - 알고리즘 성능 분석
+    - Stack --> push, pop, peek
+    - 수식의 계산 prefix, infix, profix
