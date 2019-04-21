@@ -1,4 +1,4 @@
-# Project: coding practice
+# Project: coding practice_code
 
 ## B, L, S > solving the one problem everyday
 
