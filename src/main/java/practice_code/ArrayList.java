@@ -129,5 +129,37 @@ public class ArrayList<E> {
 
     }
 
+    public ListIterator iterator() {
+        return new ListIterator();
+    }
+
+    public class ListIterator implements iterator<E> {
+        private int _nexPosition;
+
+        private ListIterator() {
+            _nexPosition = 0;
+        }
+
+
+        @Override
+        public boolean hasNext() {
+            return _nexPosition < ArrayList.this.size;
+        }
+
+        @Override
+        public E next() {
+
+            if (_nexPosition == ArrayList.this.size) {
+                return null;
+            } else {
+                E next = ArrayList.this.elements()[this._nexPosition];
+                this._nexPosition++;
+                return next;
+            }
+
+
+        }
+    }
+
 
 }
