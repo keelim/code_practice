@@ -148,7 +148,6 @@ public class ArrayList<E> {
 
         @Override
         public E next() {
-
             if (_nexPosition == ArrayList.this.size) {
                 return null;
             } else {
@@ -156,8 +155,6 @@ public class ArrayList<E> {
                 this._nexPosition++;
                 return next;
             }
-
-
         }
     }
 

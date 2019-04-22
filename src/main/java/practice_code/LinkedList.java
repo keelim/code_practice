@@ -118,5 +118,33 @@ public class LinkedList<E> {
 
     }
 
+    public ListIterator iterator() {
+        return new ListIterator();
+    }
+
+    public class ListIterator implements iterator<E> {
+        private Node<E> _nextnode;
+
+        private ListIterator() {
+            _nextnode = LinkedList.this.head();
+        }
+
+        @Override
+        public boolean hasNext() {
+            return this._nextnode != null;
+        }
+
+        @Override
+        public E next() {
+            if (this._nextnode == null) {
+                return null;
+            } else {
+                E next = _nextnode.element();
+                _nextnode = _nextnode.next();
+                return next;
+            }
+        }
+    }
+
 
 }
