@@ -1,22 +1,23 @@
 package practice_code;
 
 public class Node<E> {
-    private E anElement;
-    private Node _next;
+    private E _element;
+    private Node<E> _next;
 
-    public E getAnElement() {
-        return anElement;
+    public E element() {
+        return _element;
     }
 
-    public void setAnElement(E anElement) {
-        this.anElement = anElement;
+    public void setElement(E _element) {
+        this._element = _element;
     }
 
-    public Node get_next() {
+    public Node<E> next() {
         return _next;
     }
 
-    public void set_next(Node _next) {
+    public void setNext(Node<E> _next) {
         this._next = _next;
     }
+
 }

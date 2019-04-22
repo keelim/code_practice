@@ -1,145 +1,133 @@
 package practice_code;
 
-import java.util.Objects;
-
 public class ArrayList<E> {
-
-
     private static final int DEFAULT_CAPACITY = 100;
-    private int _size;
-    private int _capacity;
-    private E[] _elements;
+    E[] _elements;
+    int capacity;
+    int size;
 
-    public int get_size() {
-        return _size;
+    public ArrayList() {
+        this(ArrayList.DEFAULT_CAPACITY);
     }
-
-    public void set_size(int _size) {
-        this._size = _size;
-    }
-
-    public int get_capacity() {
-        return _capacity;
-    }
-
-    public void set_capacity(int _capacity) {
-        this._capacity = _capacity;
-    }
-
-    public E[] get_elements() {
-        return _elements;
-    }
-
-    public void set_elements(E[] _elements) {
-        this._elements = _elements;
-    }
-
-
 
     @SuppressWarnings("unchecked")
-    public ArrayList() {
-        _size = 0;
-        _capacity = DEFAULT_CAPACITY;
-        _elements = ((E[]) new Objects[this._capacity]);
-    }
-
-    @SuppressWarnings("uncheked")
     public ArrayList(int givenCapacity) {
-        _size = 0;
-        _capacity = givenCapacity;
-        _elements = ((E[]) new Objects[this._capacity]);
-
-    }
-
-    public int frequencyOf(E anElement) {
-        int frequencycount = 0;
-        for (int i = 0; i < this.get_size(); i++) {
-            if (this.get_elements()[i].equals(anElement)) {
-                frequencycount++;
-            }
-        }
-        return frequencycount;
-    }
-
-    public E any() {
-        if (this.isEmpty()) {
-            return null;
-        } else {
-            return this.get_elements()[0];
-        }
+        this.capacity = givenCapacity;
+        this._elements = (E[]) new Object[givenCapacity];
+        this.size = 0;
     }
 
     public boolean isEmpty() {
-        return (this.get_size() == 0);
+        return (this.size == 0);
     }
-
 
     public boolean isFull() {
-        return (this.get_size() == this.get_capacity());
+        return (this.size == this.capacity);
     }
 
-    public boolean add(E anElement) {
+    public E[] elements() {
+        return _elements;
+    }
+
+    public void setElements(E[] _elements) {
+        this._elements = _elements;
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
+    }
+
+    public int size() {
+        return size;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
+    }
+
+    private boolean anElementDoesExistAt(int anOrder) {
+        return ((anOrder >= 0) && (anOrder < this.size));
+    }
+
+    public E elementAt(int anOrder) {
+        int position = anOrder;
+        if (this.anElementDoesExistAt(anOrder)) {
+            return this._elements[position];
+        } else {
+            return null;
+        }
+    }
+
+    public E last() {
+        if (this.isEmpty()) {
+            return null;
+        } else {
+            return this._elements[this.size - 1];
+        }
+    }
+
+    public int orderOf(E anElement) {
+        for (int order = 0; order < this.size; order++) {
+            if (this._elements[order].equals(anElement)) {
+                return order;
+            }
+        }
+        return -1;
+    }
+
+    public boolean doesContain(E anElement) {
+        for (int order = 0; order < this.size; order++) {
+            if (this.elements()[order].equals(anElement)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean addTo(E anElement, int anOrder) {
         if (this.isFull()) {
             return false;
         } else {
-            this.get_elements()[this.get_size()] = anElement;
-            this.set_size(1 + this.get_size());
-            return true;
-        }
-    }
-
-    public E removeAny() {
-        E remove = null;
-        if (this.isEmpty()) {
-            return remove;
-        } else {
-            remove = this.get_elements()[this.get_size() - 1];
-            this.get_elements()[this.get_size() - 1] = null;
-            this.set_size(this.get_size() - 1);
-            return remove;
-        }
-
-    }
-
-    public void clear() {
-        for (int i = 0; i < this.get_size(); i++) {
-            this.get_elements()[i] = null;
-        }
-        this.set_size(0);
-    }
-
-    public ListIterator iteartor() {
-        return new ListIterator();
-    }
-
-    public class ListIterator implements iterator {
-        private int _nextPosition;
-
-        public ListIterator() {
-            _nextPosition = 0;
-        }
-
-        @Override
-        public boolean hasNext() {
-            return (this._nextPosition <= ArrayList.this._size);
-        }
-
-        @Override
-        public E next() {
-            if (_nextPosition == ArrayList.this.get_size()) {
-                return null;
+            if (anOrder >= 0 && anOrder <= this.size) {
+                this.makeRoomAt(anOrder);
+                this.elements()[anOrder] = anElement;
+                this.size++;
+                return true;
             } else {
-                E next = ArrayList.this.get_elements()[this._nextPosition];
-                this._nextPosition++;
-                return next;
+                return false;
             }
+        }
+    }
+
+    private void makeRoomAt(int aPosition) {
+        for (int i = this.size; i > aPosition; i--) {
+            this.elements()[i] = this.elements()[i - 1];
 
         }
     }
+
+    public E removeFrom(int anOrder) {
+        E remove = null;
+        if (this.anElementDoesExistAt(anOrder)) {
+            remove = this.elementAt(anOrder);
+            this.removeGapAt(anOrder);
+            this.size--;
+        }
+        return remove;
+
+    }
+
+    private void removeGapAt(int aPosition) {
+        for (int i = aPosition + 1; i < this.size; i++) {
+            this.elements()[i] = this.elements()[i - 1];
+        }
+        this.elements()[this.size - 1] = null;
+
+    }
+
 
 }
-
-
-
-
-
