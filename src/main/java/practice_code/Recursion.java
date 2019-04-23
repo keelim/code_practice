@@ -20,16 +20,16 @@ public class Recursion {
         }
     }
 
-    public int findMax(int[] a, int left, int right) {
-        int maxOfPart;
+    public int findMax1(int[] a, int left, int right) {
+        int maxpart;
         if (left == right) {
             return a[left];
         } else {
-            maxOfPart = findMax(a, left + 1, right);
-            if (a[left] >= maxOfPart) {
+            maxpart = findMax1(a, left + 1, right);
+            if (a[left] > maxpart) {
                 return a[left];
             } else {
-                return maxOfPart;
+                return maxpart;
             }
         }
     }
@@ -46,31 +46,30 @@ public class Recursion {
         return max;
     }
 
-    public void printlnReverse(char[] s, int from) {
-        printlnReverse(s, from + 1);
-        System.out.println(s[from]);
+    public void printReverse(char[] s, int from) {
+        if (from < s.length) {
+            printReverse(s, from + 1);
+            System.out.println(s[from]);
+        }
     }
 
     public int findMax2(int[] a, int left, int right) {
-        int maxLeft;
+        int maxleft;
         int maxRight;
         int mid;
+
         if (left == right) {
             return a[left];
         } else {
             mid = (left + right) / 2;
-            maxLeft = findMax2(a, left, mid);
+            maxleft = findMax2(a, left, mid);
             maxRight = findMax2(a, mid + 1, right);
-            if (maxLeft >= maxRight) {
-                return maxLeft;
+            if (maxleft >= maxRight) {
+                return maxleft;
             } else {
                 return maxRight;
             }
         }
-    }
-
-    public void quickSort(int[] a, int left, int right) {
-        quickRecursively(a, left, right);
     }
 
     private void quickRecursively(int[] a, int left, int right) {
@@ -79,7 +78,6 @@ public class Recursion {
             quickRecursively(a, left, mid - 1);
             quickRecursively(a, mid + 1, right);
         }
-
     }
 
     private int partition(int[] a, int left, int right) {
@@ -89,14 +87,13 @@ public class Recursion {
         do {
             do {
                 toRight++;
-            } while (a[toRight] < a[pivot]);
+            } while (a[toRight] > a[pivot]);
             do {
                 toLeft--;
-            } while (a[toLeft] > a[pivot]);
+            } while (a[toLeft] < a[pivot]);
             if (toRight < toLeft) {
-                swap(a, toLeft, toRight);
+                swap(a, toRight, toLeft);
             }
-
         } while (toRight < toLeft);
         swap(a, left, toLeft);
         return toLeft;
