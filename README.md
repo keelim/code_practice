@@ -59,3 +59,15 @@
     - 알고리즘 성능 분석
     - Stack --> push, pop, peek
     - 수식의 계산 prefix, infix, profix
+    
+## 2019 04 30
+- 자료구조
+- 알고리즘
+1. Queue
+2. Tree
+3. Dictionary
+4. Priority Queue
+5. Double-ended priority Queue
+6. Hash
+7. Multi-way Search Tree
+8. Height-balanced Binary tree
