@@ -14,10 +14,18 @@ public class Queue {
             String[] temp = sc.nextLine().split(" ");
             if (temp[0].equals("1")) {
                 stack.push(Integer.parseInt(temp[1]));
+
             } else if (temp[0].equals("2")) {
                 stack.pop();
+
             } else if (temp[0].equals("3")) {
-                System.out.println(stack.peek());
+                int max = stack.peek();
+
+                for(int i : stack){
+                    if(max < i)
+                        max = i;
+                }
+                System.out.println(max);
             }
 
         }
