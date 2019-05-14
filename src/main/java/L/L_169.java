@@ -24,10 +24,7 @@ public class L_169 {
             temp2.add(b);
         }
 
-
         int answer = 0;
-
-
         return answer;
     }
 }

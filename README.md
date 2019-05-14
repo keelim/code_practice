@@ -62,9 +62,12 @@
     
 ## 2019 04 30
 - 자료구조
+    - 특히 recursive로 되어 있는 코드를 위주로 보기
 - 알고리즘
 1. Queue
 2. Tree
+    - BinarySearchTree
+    - 순회 traverls
 3. Dictionary
 4. Priority Queue
 5. Double-ended priority Queue
