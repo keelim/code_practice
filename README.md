@@ -16,4 +16,5 @@ code practice plan
 ## 2019 07 21
 1. today: 
 
-2. 
+2. Regex regular expression
+
