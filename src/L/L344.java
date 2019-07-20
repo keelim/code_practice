@@ -2,7 +2,7 @@ package L;
 
 import java.util.Arrays;
 
-class L75 {
+public class L344 {
     public void sortColors(int[] nums) {
         for (int a : nums) {
             System.out.println(a);
@@ -12,11 +12,5 @@ class L75 {
         for (int a : nums) {
             System.out.println(a);
         }
-    }
-
-    public static void main(String[] args) {
-        new L75().sortColors(new int[]{1, 2, 3, 4});
-
-
     }
 }
