@@ -34,8 +34,25 @@ code practice plan
     - 강한 결합의 경우 
 
 
-<code>
+```
     public static void memberUser2(Meerber m ){
         Member m2 = m //약한 결합
     }
-</code>
+```
+
+## 2019 08 02
+> singleton pattern
+
+    - 객체의 생성 개수 제한
+    - 최대 객체 개수를 제한
+    - 객체의 생성을 요청 하는 쪽에서는 신경을 쓰면 안된다.
+    - ex> 데이터베이스 커넥션 풀, 로그라이터, 사운드 매니저, 스코어 매니저
+    - 데이터를 일관되게 유지
+    - static 이라서 가능한 부분
+    - 생성자를 private 으로 설정을 하는 것이 접근을 하기 어렵다.
+    - 이미 member로 선언을 하면 굳이 synchronized 를 할 필요가 없다.
+    - 줄을 세워야 하기 때문에 비용이 많이 든다.
+    - getinstance로 만들면 된다.
+
+## 2019 08 03
+> Flyweight Pattern
