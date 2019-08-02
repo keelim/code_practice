@@ -102,7 +102,6 @@ public class TreeFactory{
     
     - ?   
 
-## 2019 08 03
 > Builder pattern
 
 ```java
@@ -116,3 +115,6 @@ public class TreeFactory{
     - 생성자를 굳이 많이 만들 이유가 없다.
     - builder 는 setter 의 반환 형식을 builder 로 바꾼다. 
 
+## 2019 08 03
+
+> Observer pattern
