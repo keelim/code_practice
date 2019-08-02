@@ -56,3 +56,46 @@ code practice plan
 
 ## 2019 08 03
 > Flyweight Pattern
+
+    - 위치 정보에 대한 객체를 모두 가지는 경우 메모리가 많이 소모가 된다.
+    - 중복이 되는 것들을 모델을 통하여 공유를 하는 방식으로 구성을 할 수 있다. 
+    - 공통된 것을 만들어 놓고 위치 정보만 다르게 하여
+     
+```java
+public class TreeModel{
+    Mesh mesh;
+    Texture bark;
+    Texture leaves;
+    public TreeModel(){
+    mesh = new Mesh();
+    bark = new Texture("bark");
+    leaves = new Texture("leaves");
+    }
+}
+
+public class Tree {
+    TreeModel treeModel;
+    Position position;
+    double height;
+    double thickness;
+}
+
+public class TreeFactory{
+    private static final TreeModel sharedTreeModel = new TreeModel();
+    public static Tree create(Position position, duoblie height, double thickness){
+        Tree tree = new Tree();
+        tree.setPosition(position);
+        tree.setHeight(height);
+        tree.setThickness(thickness);
+        tree.setTreeModel(sharedTreeModel);
+    } 
+}
+```
+    - 미리 정의 한 TreeModel 를 사용한다.
+    - 많은 객체를 만들 때 성능 향상
+    - 메모리 줄임
+    - state pattern 잘 어울린다.
+    - 워드프로세서 문자들의 그래픽적 표현 자료구조
+    - jdk(String, valueOf
+    
+   
