@@ -98,4 +98,16 @@ public class TreeFactory{
     - 워드프로세서 문자들의 그래픽적 표현 자료구조
     - jdk(String, valueOf
     
-   
+> 얕은 복사, 깊은 복사
+    
+    - ?   
+
+## 2019 08 03
+> Builder pattern
+
+```java
+    Member customer = Member.builder()
+    .name("keelim")
+    .age(30)
+    .build();
+```
