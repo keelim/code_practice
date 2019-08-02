@@ -111,3 +111,9 @@ public class TreeFactory{
     .age(30)
     .build();
 ```
+> Observer pattern
+> Adapter pattern
+> Facade pattern
+> Decorator pattern
+> bridge pattern
+> strategy pattern
