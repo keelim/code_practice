@@ -1,4 +1,4 @@
-package adapter;
+package design_pattern.adapter;
 
 public class TestPattern1 {
     public static void main(String[] args) {

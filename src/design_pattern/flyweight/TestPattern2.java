@@ -1,4 +1,4 @@
-package flyweight;
+package design_pattern.flyweight;
 
 public class TestPattern2 {
     public static void main(String[] args) {

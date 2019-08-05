@@ -1,4 +1,4 @@
-package singleton;
+package design_pattern.singleton;
 
 public class Database{
     //dao의 기능을 하는 것을 만든다,

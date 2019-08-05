@@ -1,4 +1,4 @@
-package singleton;
+package design_pattern.singleton;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;

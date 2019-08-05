@@ -1,6 +1,4 @@
-package singleton;
-
-import singleton.Database;
+package design_pattern.singleton;
 
 public class TestPattern {
     public static void main(String[] args) {

@@ -41,7 +41,7 @@ code practice plan
 ```
 
 ## 2019 08 02
-> singleton pattern
+> design_pattern.singleton pattern
 
     - 객체의 생성 개수 제한
     - 최대 객체 개수를 제한
@@ -105,19 +105,19 @@ public class TreeFactory{
 > Builder pattern
 
 ```java
-    Member customer = Member.builder()
+    Member customer = Member.design_pattern.builder()
     .name("keelim")
     .age(30)
     .build();
 ```
 
-    - 인자가 많을 떄는 builder pattern
+    - 인자가 많을 떄는 design_pattern.builder pattern
     - 생성자를 굳이 많이 만들 이유가 없다.
-    - builder 는 setter 의 반환 형식을 builder 로 바꾼다. 
+    - design_pattern.builder 는 setter 의 반환 형식을 design_pattern.builder 로 바꾼다. 
 
 ## 2019 08 03
 
-> adapter pattern == wrapper pattern
+> design_pattern.adapter pattern == wrapper pattern
     
     - class, instance
     - 이미 존재하는 클래스가 많은 경우도 있다. 
@@ -130,13 +130,22 @@ public class TreeFactory{
 
 ## 2019 08 04 
 
-> facade pattern
+> design_pattern.facade pattern
 
     - 파사드 패턴
     - 하위시스템을 보다 쉽게 사용할 수 있게 해주는 고급 인터페이스 정의
-    - adapter --> 다른 코드를 사용할 수 있게 하는 것
-    - facade --> 좀더 쉽세 사용하는 wrapper를 제공하는 것
+    - design_pattern.adapter --> 다른 코드를 사용할 수 있게 하는 것
+    - design_pattern.facade --> 좀더 쉽세 사용하는 wrapper를 제공하는 것
     - 캡슐화되지 않은 코드를 처리
     - 최소 단위 클래스를 설계할 수 있다.
     - 최소 클래스를 만들고 그것을 종합하는 것을 만든다.
     
+> Bridge pattern
+
+    - 기능 클래스 계층
+    - interaface 기능을 추가하는 것
+    - 모든 클래스를 수정을 해야 한다.
+    - 새로운 기능이 필요가 없을 수 도 있다.  
+    - 구현 클래스 계층 
+    - interface의 수정 없이 클래스를 하나를 더 만들어서 생성을 한다.
+    - 

@@ -1,4 +1,4 @@
-package singleton;
+package design_pattern.singleton;
 
 public class TestPattern2 {
     static int nNum = 0;

@@ -1,4 +1,4 @@
-package facade;
+package design_pattern.facade;
 
 public class SimpleProductFacade {
     ComplexProduct difficultProduct;

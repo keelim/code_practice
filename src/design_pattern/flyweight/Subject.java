@@ -1,4 +1,4 @@
-package flyweight;
+package design_pattern.flyweight;
 
 public class Subject {
     private String name;

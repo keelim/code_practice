@@ -1,4 +1,4 @@
-package builder;
+package design_pattern.builder;
 
 public class TestPattern1 {
     public static void main(String[] args) {

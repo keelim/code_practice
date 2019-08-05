@@ -1,6 +1,4 @@
-package singleton;
-
-import java.util.logging.Logger;
+package design_pattern.singleton;
 
 public class TestPattern4 {
     public static void main(String[] args) {
