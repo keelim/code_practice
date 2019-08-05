@@ -117,4 +117,26 @@ public class TreeFactory{
 
 ## 2019 08 03
 
-> Observer pattern
+> adapter pattern == wrapper pattern
+    
+    - class, instance
+    - 이미 존재하는 클래스가 많은 경우도 있다. 
+    - 기존 클래스를 개조해서 필요한 클래스를 만드는 것
+    - 프로그램 검사도 쉬워진다.
+    - interface 개조를 해야 한다.
+    - 기존 클래스의 사양만 하면 새로운 클래스를 만들 수 있다.
+    - interface를 사용을 하여 코드의 수정을 최소화 하는 것이다.
+    - abstract 클래스르 활용하여 사용 할 수 있다. 
+
+## 2019 08 04 
+
+> facade pattern
+
+    - 파사드 패턴
+    - 하위시스템을 보다 쉽게 사용할 수 있게 해주는 고급 인터페이스 정의
+    - adapter --> 다른 코드를 사용할 수 있게 하는 것
+    - facade --> 좀더 쉽세 사용하는 wrapper를 제공하는 것
+    - 캡슐화되지 않은 코드를 처리
+    - 최소 단위 클래스를 설계할 수 있다.
+    - 최소 클래스를 만들고 그것을 종합하는 것을 만든다.
+    
