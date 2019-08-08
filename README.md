@@ -148,4 +148,18 @@ public class TreeFactory{
     - 새로운 기능이 필요가 없을 수 도 있다.  
     - 구현 클래스 계층 
     - interface의 수정 없이 클래스를 하나를 더 만들어서 생성을 한다.
-    - 
+
+## 2019 08 05 
+> Observer pattern
+
+    - 값을 반영을 하는 것을 객체로 표현
+    - Subject 객체과 Observer 객체의 관계
+    - Observable sub class 를 만들어야 한다.
+    - 재사용성 제한이 생긴다.
+    - protected으로 구현이 되어 있다.  
+    - 이벤트 Listener 같은 것들은 observer pattern 으로 사용이 된다.
+
+
+## 2019 08 09 
+> Decorator pattern
+
