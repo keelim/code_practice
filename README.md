@@ -163,3 +163,22 @@ public class TreeFactory{
 ## 2019 08 09 
 > Decorator pattern
 
+## 2019 08 13
+> Decorator pattern
+
+    - 기본 기능을 확장을 할 수 있게 한다.
+    - 기존 코드 행동 확장
+    - 상속 대신 사용 
+    - 필터 스트림
+    - 자잘한 객체가 많이 추가될 수 있다. 
+    - 코드가 필요이상 복잡
+    - decorator, factory, builder
+    
+    
+    
+```java
+BufferedReader br = null;
+br = new BufferedReader(new FileReader(new File("test.txt")));
+
+
+```
