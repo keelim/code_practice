@@ -173,6 +173,8 @@ public class TreeFactory{
     - 자잘한 객체가 많이 추가될 수 있다. 
     - 코드가 필요이상 복잡
     - decorator, factory, builder
+    - 추상 클래스를 정의를 하고 상속을 받아서 사용을 하는 것
+    
     
     
     
@@ -180,5 +182,9 @@ public class TreeFactory{
 BufferedReader br = null;
 br = new BufferedReader(new FileReader(new File("test.txt")));
 
-
 ```
+
+## 2019 08 14
+> strategy pattern
+
+    - 
