@@ -1,10 +1,7 @@
 package Hackers;
 
-import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Scanner;
+import java.util.*;
 
 public class Javabasic {
     int N = 2;
@@ -120,7 +117,7 @@ public class Javabasic {
         sc.close();
     }
 
-    public void formatter(){
+    public void formatter() {
         Scanner scanner = new Scanner(System.in);
         double payment = scanner.nextDouble();
         scanner.close();
@@ -128,12 +125,27 @@ public class Javabasic {
         // Write your code here.
 
 
-        System.out.println("US: " + us);
-        System.out.println("India: " + india);
-        System.out.println("China: " + china);
-        System.out.println("France: " + france);
+//        System.out.println("US: " + us);
+//        System.out.println("India: " + india);
+//        System.out.println("China: " + china);
+//        System.out.println("France: " + france);
     }
 
+    public void list() {
+        Scanner sc = new Scanner(System.in);
+        String[] element = sc.nextLine().split(" ");
+        ArrayList<String> list = new ArrayList<>(Arrays.asList(element));
 
-
+        int test_case = sc.nextInt();
+        for (int i = 0; i < test_case; i++) {
+            if (sc.nextLine().equals("Insert")) {
+                String[] temp = sc.nextLine().split(" ");
+                list.add(Integer.parseInt(temp[0]), temp[1]);
+            } else if (sc.nextLine().equals("Delete")) {
+                String[] temp = sc.nextLine().split(" ");
+                list.remove(Integer.parseInt(temp[0]));
+            }
+        }
+        System.out.println(list);
+    }
 }

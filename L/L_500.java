@@ -6,7 +6,7 @@ class L_500 {
     public String[] findWords(String[] words) {
         String[] answer = new String[0];
 
-        String[] allow_array = new String[] {"A", "S", "D", "F", "G", "H", "J", "K","L",
+        String[] allow_array = new String[] {"A", "S", "D", "F", "G", "H", "J", "K", "L",
                 "a", "s", "d", "f", "g", "h", "j", "k", "l"};
 
         ArrayList<String> arrayList = new ArrayList<>();
