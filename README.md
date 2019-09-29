@@ -192,3 +192,9 @@ br = new BufferedReader(new FileReader(new File("test.txt")));
     - 워드 문서에서 프린터 폰트
     - 정수 배열에 대해 사용하는 정렬 알고리즘
     - 게임 캐릭터의 무기 사용 
+
+## 2019 09 29
+> sum 문제 풀기
+
+    - C++ 도 같이 작성을 할 것
+    - 회로?, 칩설계
