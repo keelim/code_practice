@@ -1,20 +1,14 @@
 #include <iostream>
-#include <vector>
-#include <algorithm>
-
 using namespace std;
 
 int main () {
-	int testNum;
-	vector<int> vc;
-
-	cin >> testNum;
-	for (auto i=0; i < testNum; i++) {
-		int temp;
-		cin >> temp;	
-		vc.push_back (temp);
+	int temp;
+	cin >> temp;
+	int answer = 0;
+	while (temp != 0) {
+		answer+=temp % 10;
+		temp/=10;
 	}
-	sort (vc.begin(), vc.end);
-	cout << vc[testNum / 2] << "\n";
+	cout << answer << "\n";
 	
 }
