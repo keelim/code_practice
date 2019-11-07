@@ -12,7 +12,13 @@ public class Solution {
                 if(temp>= answer)
                     answer=temp;
             }
-            System.out.println("#"+i+" "+answer);
+
+
         }
+        char[] name = new char[100];
+        for (int i = 0; i < name.length; i++) {
+            name[i] = '\0';
+        }
+        
     }
 }
