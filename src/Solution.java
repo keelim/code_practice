@@ -1,24 +1,16 @@
-import java.util.Scanner;
+import java.util.*;
 
 public class Solution {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int testCase = sc.nextInt();
-        for (int i = 1; i <= testCase; i++) {
-            int answer = 0;
-            for (int j = 0; j < 10; j++) {
-                int temp = sc.nextInt();
-                if(temp>= answer)
-                    answer=temp;
-            }
-
-
+        int testNum = sc.nextInt();
+        ArrayList<Integer> arrayList = new ArrayList<>();
+        for (int i = 0; i < testNum; i++) {
+            arrayList.add(sc.nextInt());
         }
-        char[] name = new char[100];
-        for (int i = 0; i < name.length; i++) {
-            name[i] = '\0';
-        }
-        
+        Collections.sort(arrayList);
+        int answer = arrayList.get(testNum/2);
+        System.out.println(answer);
     }
 }
