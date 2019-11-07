@@ -1,16 +1,14 @@
-import java.util.*;
+import java.util.Scanner;
 
 public class Solution {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int testNum = sc.nextInt();
-        ArrayList<Integer> arrayList = new ArrayList<>();
-        for (int i = 0; i < testNum; i++) {
-            arrayList.add(sc.nextInt());
+        String[] temp = sc.nextLine().split("");
+        int answer = 0;
+        for (int i = 0; i < temp.length; i++) {
+            answer += Integer.parseInt(temp[i]);
         }
-        Collections.sort(arrayList);
-        int answer = arrayList.get(testNum/2);
         System.out.println(answer);
     }
 }
