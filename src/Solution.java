@@ -22,7 +22,7 @@ public class Solution {
             int[] end = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
             if (iMonth == 0 || iMonth >= 13) {
-                System.outk.println("#" + i + " " + -1);
+                System.out.println("#" + i + " " + -1);
                 continue;
             } else if (iDay == 0 || iDay >= 32) {
                 System.out.println("#" + i + " " + -1);
