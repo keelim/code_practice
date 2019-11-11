@@ -2,9 +2,8 @@
 using namespace std;
 
 int main () {
-	int testNum;
-	cin >> testNum;
-	for (auto i=0; i < testNum; i++) {
-		cout << "#";
-	}
+	int pass, input;
+	cin >> pass;
+	cin >> input;
+	cout << pass - input + 1 << "\n";
 }
