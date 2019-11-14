@@ -2,12 +2,12 @@
 using namespace std;
 
 int main () {
-	int testCase;
-	cin >> testCase;
-	for (auto i=1; i <=testCase; i++) {
-		int first;
-		int second;
-		cin >> first, cin >> second;
-		cout << "#" << i << " " << first / second << " " << first % second << "\n";	
+	for (auto i=0; i < 5; i++) {
+		for (auto j=0; j < 5; j++) {
+			if (i == j)
+				cout << "#";
+			else
+				cout << "+";
+		}
 	}
 }

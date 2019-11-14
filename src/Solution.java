@@ -1,13 +1,18 @@
+import java.util.Scanner;
+
 public class Solution {
+
     public static void main(String[] args) {
-        for (int i = 0; i < 5; i++) {
-            for (int j = 0; j < 5; j++) {
-                if (j == i)
-                    System.out.print("#");
-                else
-                    System.out.print("+");
-            }
-            System.out.println();
+
+        Scanner sc = new Scanner(System.in);
+
+        int data = Integer.parseInt(sc.nextLine());
+        int answer = 0;
+
+        for (int i = 0; i <= data; i++) {
+            answer+=i;
         }
+        System.out.println(answer);
     }
 }
+
