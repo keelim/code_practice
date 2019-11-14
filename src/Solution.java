@@ -3,8 +3,11 @@ import java.util.Scanner;
 public class Solution {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int pass = sc.nextInt(), input = sc.nextInt();
-        System.out.println(pass - input + 1);
+        int test_case = Integer.parseInt(sc.nextLine());
+
+        for (int t = 1; t <= test_case; t++) {
+            int first = sc.nextInt(), second = sc.nextInt();
+            System.out.println("#" + t +" "+ first / second + " " + first % second);
+        }
     }
 }
-
