@@ -4,12 +4,11 @@ public class Solution {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int data = sc.nextInt();
-        int answer = 0;
-        for (int i = 1; i <= data; i++) {
-            answer += i;
+        int anInt = sc.nextInt();
+        int answer = 1;
+        for (int t = 0; t <= anInt; t++) {
+            System.out.print(answer + " ");
+            answer *= 2;
         }
-        System.out.println(answer);
     }
 }
-
