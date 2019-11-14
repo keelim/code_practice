@@ -2,8 +2,12 @@
 using namespace std;
 
 int main () {
-	int pass, input;
-	cin >> pass;
-	cin >> input;
-	cout << pass - input + 1 << "\n";
+	int testCase;
+	cin >> testCase;
+	for (auto i=1; i <=testCase; i++) {
+		int first;
+		int second;
+		cin >> first, cin >> second;
+		cout << "#" << i << " " << first / second << " " << first % second << "\n";	
+	}
 }
