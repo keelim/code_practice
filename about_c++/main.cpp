@@ -2,11 +2,10 @@
 using namespace std;
 
 int main () {
-	int aint;
-	cin >> aint;
-	int answer=1;
-	for (auto i=0; i <= aint; i++) {
-		cout << answer << " ";
-		answer*=2;
-	}
+	int first, second;
+	cin >> first >> second;
+	cout << first + second << "\n";
+	cout << first - second << "\n";
+	cout << first * second << "\n";
+	cout << first / second << "\n";
 }

@@ -4,14 +4,14 @@ public class Solution {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int first = sc.nextInt();
-        int second = sc.nextInt();
+        int a = sc.nextInt();
+        int b = sc.nextInt();
 
-        System.out.println(first + second);
-        System.out.println(first - second);
-        System.out.println(first * second);
-        System.out.println(first / second);
+        if ((a == 1 && b == 3) || (a == 2 && b == 1) || (a == 3 && b == 2))
+            System.out.println("A");
+        else
+            System.out.println("B");
     }
 
-
 }
+
