@@ -1,17 +1,40 @@
-import java.util.Scanner;
+import java.util.ArrayList;
 
-public class Solution {
+class Solution {
 
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int a = sc.nextInt();
-        int b = sc.nextInt();
+    public int solution(int[] people, int[] tshirts) {
+        ArrayList<Integer> peopleList = new ArrayList<>();
+        ArrayList<Integer> shirtList = new ArrayList<>();
+        int answer = 0;
 
-        if ((a == 1 && b == 3) || (a == 2 && b == 1) || (a == 3 && b == 2))
-            System.out.println("A");
-        else
-            System.out.println("B");
+
+        for (int person : people) {
+            peopleList.add(person);
+        }
+        for (int tshirt : tshirts) {
+            shirtList.add(tshirt);
+        }
+        for (int i = 0; i < peopleList.size(); i++) {
+            int first = peopleList.get(i);
+            for (int j = 0; j < shirtList.size(); j++) {
+                int second = shirtList.get(j);
+                if (second == first) {
+                    peopleList.remove(i);
+                    shirtList.remove(j);
+                    answer++;
+                } else {
+                    for (int k = 0; k < shirtList.size(); k++) {
+                        second++;
+                        if (second == first) {
+                            peopleList.remove(i);
+                            shirtList.remove(k);
+                            answer++;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        return answer;
     }
-
 }
-
