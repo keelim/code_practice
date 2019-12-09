@@ -1,40 +1,27 @@
-import java.util.ArrayList;
+import java.util.Arrays;
 
 class Solution {
+    public int solution(int[] grade, int max_diff) {
+        int[] grade_count = new int[grade.length];
+        Arrays.fill(grade_count, 0);
 
-    public int solution(int[] people, int[] tshirts) {
-        ArrayList<Integer> peopleList = new ArrayList<>();
-        ArrayList<Integer> shirtList = new ArrayList<>();
-        int answer = 0;
-
-
-        for (int person : people) {
-            peopleList.add(person);
-        }
-        for (int tshirt : tshirts) {
-            shirtList.add(tshirt);
-        }
-        for (int i = 0; i < peopleList.size(); i++) {
-            int first = peopleList.get(i);
-            for (int j = 0; j < shirtList.size(); j++) {
-                int second = shirtList.get(j);
-                if (second == first) {
-                    peopleList.remove(i);
-                    shirtList.remove(j);
-                    answer++;
-                } else {
-                    for (int k = 0; k < shirtList.size(); k++) {
-                        second++;
-                        if (second == first) {
-                            peopleList.remove(i);
-                            shirtList.remove(k);
-                            answer++;
-                            break;
-                        }
-                    }
+        for (int i = 0; i < grade.length; i++) {
+            int standard = grade[i];
+            int count = 0;
+            for (int value : grade) {
+                if (value >= standard - max_diff && value <= standard + max_diff) {
+                    count++;
                 }
             }
+            grade_count[i] = count;
         }
-        return answer;
+
+
+        int max = 0;
+        for (int i = 0; i < grade_count.length; i++) {
+            if (grade_count[i] >= max)
+                max = grade_count[i];
+        }
+        return max;
     }
 }
