@@ -198,3 +198,16 @@ br = new BufferedReader(new FileReader(new File("test.txt")));
 
     - C++ 도 같이 작성을 할 것
     - 회로?, 칩설계
+    
+## 2019 12 22
+> 존슨 트로터 알고리즘 ?
+    
+    - 최소 변경 순서 알고리즘 
+    - 
+> for loop 
+
+> 부분집합 // 배낭집합
+
+> 바이너리 카운팅 Lexicographic order
+
+> 조합 / 순열 

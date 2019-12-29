@@ -1,27 +1,25 @@
 import java.util.Arrays;
+import java.util.Scanner;
 
-class Solution {
-    public int solution(int[] grade, int max_diff) {
-        int[] grade_count = new int[grade.length];
-        Arrays.fill(grade_count, 0);
-
-        for (int i = 0; i < grade.length; i++) {
-            int standard = grade[i];
-            int count = 0;
-            for (int value : grade) {
-                if (value >= standard - max_diff && value <= standard + max_diff) {
-                    count++;
-                }
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int testCase = sc.nextInt();
+        for (int i = 0; i < testCase; i++) {
+            int total = sc.nextInt();
+            int count = sc.nextInt();
+            int[] array = new int[total];
+            Arrays.fill(array, -1);
+            for (int j = 0; j < count; j++) {
+                int target = sc.nextInt();
+                array[target - 1] = 1;
             }
-            grade_count[i] = count;
+            System.out.print("#" + (i + 1) + " ");
+            for (int j = 0; j < total; j++) {
+                if (array[j] == -1)
+                    System.out.print(j + 1 + " ");
+            }
+            System.out.println();
         }
-
-
-        int max = 0;
-        for (int i = 0; i < grade_count.length; i++) {
-            if (grade_count[i] >= max)
-                max = grade_count[i];
-        }
-        return max;
     }
 }
