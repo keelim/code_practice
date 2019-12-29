@@ -11,7 +11,7 @@ int main()
         string answer = "";
         string temp;
         cin >> temp;
-        temp = temp.end;
+        temp = temp.substr(temp.length()-1,temp.length());
         int now = stoi(temp);
         if (now % 2 == 0)
             answer = "Even";
