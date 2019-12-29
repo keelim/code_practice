@@ -1,5 +1,4 @@
 #include <iostream>
-#include <string>
 using namespace std;
 
 int main()
@@ -8,16 +7,16 @@ int main()
     cin >> testCase;
     for (auto i = 1; i <= testCase; i++)
     {
-        string answer = "";
-        string temp;
-        cin >> temp;
-        temp = temp.substr(temp.length()-1,temp.length());
-        int now = stoi(temp);
-        if (now % 2 == 0)
-            answer = "Even";
-        else
-            answer = "Odd";
-
-        cout << "#" << i << " " << answer;
+        int answer = 0;
+        for (auto j = 0; j < 5; j++)
+        {
+            int temp;
+            cin >> temp;
+            if (temp < 40)
+                temp = 40;
+            answer += temp;
+        }
+        answer /= 5;
+        cout << "#" << i << " " << answer << "\n";
     }
 }
