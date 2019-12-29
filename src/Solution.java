@@ -5,17 +5,16 @@ public class Solution {
         Scanner sc = new Scanner(System.in);
         int testCase = sc.nextInt();
         for (int i = 1; i <= testCase; i++) {
-            String answer = "";
-            String temp = sc.next();
-            temp = temp.substring(temp.length()-1, temp.length());
-            int now = Integer.parseInt(temp);
-            if(now%2==0)
-                answer="Even";
-            else
-                answer="Odd";
-
-
-            System.out.println("#"+i+" "+answer);
-        }      
+            int answer = 0;
+            for (int j = 0; j < 5; j++) {
+                int temp = sc.nextInt();
+                if (temp < 40) {
+                    temp = 40;
+                }
+                answer += temp;
+            }
+            answer /= 5;
+            System.out.println("#" + i + " " + answer);
+        }
     }
 }
