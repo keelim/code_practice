@@ -1,26 +1,27 @@
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.*;
+import java.util.Scanner;
 
 public class Solution {
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int testCase = sc.nextInt();
         for (int i = 1; i <= testCase; i++) {
-            int first = sc.nextInt();
-            int second = sc.nextInt();
-            int answer = 0;
-            ArrayList<Integer> array = new ArrayList<>();
-            for (int j = 1; j <= first; j++) {
-                array.add(sc.nextInt());
+            int num = sc.nextInt();
+            int count = 0;
+            for (int j = 0; j < num; j++) {
+                String[] temp = sc.next().toLowerCase().split("");
+                boolean flag = true;
+                for (int k = 0; k < temp.length / 2; k++) {
+                    if (temp[k].equals(temp[temp.length - 1 - k]))
+                        flag = true;
+                    else
+                        flag = false;
+                }
+                if (flag)
+                    count++;
             }
-            Collections.sort(array, Collections.reverseOrder());
 
-            for (int j = 0; j < second; j++) {
-             answer+=array.get(j);
-            }
-        
-            System.out.println("#"+i+" "+answer);
+            System.out.println("#" + i + " " + count);
         }
     }
 }

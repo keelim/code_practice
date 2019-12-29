@@ -1,6 +1,8 @@
 #include <iostream>
 #include <algorithm>
 #include <vector>
+#include <set>
+#include <string>
 using namespace std;
 
 int main()
@@ -9,25 +11,13 @@ int main()
     cin >> testCase;
     for (auto i = 1; i <= testCase; i++)
     {
-        int first;
-        cin >> first;
-        int second;
-        cin >> second;
-
-        int answer = 0;
-        vector<int> array;
-        for (auto i = 1; i <= first; i++)
+        set<int, greater<int>> col;
+        string line;
+        cin >> line;
+        for (auto i = 0; i < line.size(); i++)
         {
-            int temp;
-            cin >> temp;
-            array.push_back(temp);
+            col.insert(line[i]);
         }
-        sort(array.begin(), array.end(), greater<int>());
-
-        for (auto i = 0; i < second; i++)
-        {
-            answer += array.at(i);
-        }
-        cout << "#" << i << " " << answer << "\n";
+        cout << "#" << i << " " << col.size() << "\n";
     }
 }
