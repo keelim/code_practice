@@ -1,25 +1,33 @@
-import java.util.Arrays;
 import java.util.Scanner;
+import java.util.*;
 
 public class Solution {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int testCase = sc.nextInt();
+
         for (int i = 0; i < testCase; i++) {
             int total = sc.nextInt();
-            int count = sc.nextInt();
-            int[] array = new int[total];
-            Arrays.fill(array, -1);
-            for (int j = 0; j < count; j++) {
-                int target = sc.nextInt();
-                array[target - 1] = 1;
-            }
-            System.out.print("#"+ (i + 1) + " ");
+            String[] line = sc.nextLine().split(" ");
+            ArrayList<String> array1 = new ArrayList<>();
+            ArrayList<String> array2 = new ArrayList<>();
             for (int j = 0; j < total; j++) {
-                if (array[j] == -1)
-                    System.out.print(j + 1 + " ");
+                if (j > total / 2)
+                    array2.add(line[j]);
+                else
+                    array1.add(line[j]);
+
+            }
+
+            System.out.println("#" + (i + 1) + " ");
+            for (int j = 0; j < total; j++) {
+                if(j%2==0)
+                array1.get(j);
+                else
+                array2.get(j);
             }
             System.out.println();
         }
+
     }
 }
