@@ -14,7 +14,7 @@ public class Solution {
                 int target = sc.nextInt();
                 array[target - 1] = 1;
             }
-            System.out.print("#" + (i + 1) + " ");
+            System.out.print("#"+ (i + 1) + " ");
             for (int j = 0; j < total; j++) {
                 if (array[j] == -1)
                     System.out.print(j + 1 + " ");
