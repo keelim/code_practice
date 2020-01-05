@@ -6,18 +6,14 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         int testCase = sc.nextInt();
         for (int i = 0; i < testCase; i++) {
-            String[] temp = sc.next().split("");
-            int count = 0;
-            int total = 0;
-            for (int j = 0; j < temp.length; j++) {
-                if (temp[j].equals("O")) {
-                    count++;
-                    total += count;
-                } else {
-                    count = 0;
+            int repeat = sc.nextInt();
+            String[] line = sc.next().split("");
+            for (int j = 0; j < line.length; j++) {
+                for (int k = 0; k < repeat; k++) {
+                    System.out.print(line[j]);
                 }
             }
-			System.out.println(total);
+            System.out.println();
         }
     }
 }
