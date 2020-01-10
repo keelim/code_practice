@@ -38,7 +38,6 @@ public class DFSBFS {
         for (int y : adj[x]) {
             if (!visited[y]) {
                 DFS(y);
-
             }
         }
     }

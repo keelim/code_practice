@@ -1,62 +1,32 @@
 import java.util.*;
 
 public class Main {
-    static ArrayList<Integer>[] graph;
-    static boolean[] visited;
+    static int max = 51;
+    static int[][] map = new int[max][max];
+    static boolean[][] visited = new boolean[max][max];
+    static int[] dx = {0, 0, 1, -1};
+    static int[] dy = {1, -1, 0, 0};
+    static int count,testCase, ;
 
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int node = sc.nextInt(), edge = sc.nextInt(), start = sc.nextInt();
-        graph = new ArrayList[node + 1]; // 그래프 만들기 ArrayList으로 이루어진 배열
+    static void dfs(int x, int y) {
+        visited[x][y] = true;
 
-        for (int i = 1; i < node + 1; i++) { //배열안에 객체 생성
-            graph[i] = new ArrayList<>();
-        }
+        for (int i = 0; i < 4; i++) {
+            int next_x = x + dx[i];
+            int next_y = y + dy[i];
 
-        for (int i = 0; i < edge; i++) { //그래프 초기화
-            int head = sc.nextInt(), tail = sc.nextInt();
-
-            graph[head].add(tail);
-            graph[tail].add(head);
-        }
-        for (int i = 1; i < node + 1; i++) { //그래프 정렬
-            Collections.sort(graph[i]);
-        }
-        visited = new boolean[node + 1];
-        dfs(start);
-        System.out.println();
-
-        visited = new boolean[node + 1];
-        bfs(start);
-        System.out.println();
-    }
-
-    private static void dfs(int x) { //깊이 탐색
-        if (visited[x]) {
-            return;
-        }
-        visited[x] = true;
-        System.out.print(x + " ");
-        for (int y : graph[x]) {
-            if (!visited[y])
-                dfs(y);
-        }
-
-    }
-
-    private static void bfs(int start) { //너비 탐색
-        Queue<Integer> queue = new LinkedList<>();
-        queue.add(start);
-        visited[start] = true;
-        while (!queue.isEmpty()) {
-            int x = queue.poll();
-            System.out.print(x + " ");
-            for (int y : graph[x]) {
-                if (!visited[y]) {
-                    visited[y] = true;
-                    queue.add(y);
-                }
+//            if() //범위 체크
+            if (map[next_x][next_y] == 1 && !visited[next_x][next_y]){
+                dfs(next_x,next_y);
             }
         }
+    }
+
+    static void init(){
+
+    }
+
+    public static void main(String[] args) {
+
     }
 }
