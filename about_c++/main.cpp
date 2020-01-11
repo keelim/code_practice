@@ -1,82 +1,58 @@
-#include<iostream>
-
+#include <cstdio>
+#include <iostream>
+#include <vector>
+#include <algorithm>
 using namespace std;
 
-#define MAX 51
-int mp[MAX][MAX];
-bool visit[MAX][MAX];
-int dx[] = {0, 0, -1, 1};
-int dy[] = {1, -1, 0, 0};
-int T, M, N, K;
-int cnt;
-int column, row;
+vector<int> vc;
 
+int dx[] = {-1, 1, 0, 0}; //x 방향
+int dy[] = {0, 0, -1, 1}; //y 방향
+int n;
+int graph[26][26];
+int room = 0; // 값
 
-//세로, 가로
-void dfs(int x, int y) { //가로 세로를 이런식으로 초기화할 수 가 있구나
-    //시작지점을 방문했다고 체크
-    visit[x][y] = true;
+// dfs 정의
+void dfs(int i, int j) { // room 숫자를 세는 것
+    graph[i][j] = 0; //방문한 곳을 0으로 바꾸는 거네
+    room++;
     for (int k = 0; k < 4; k++) {
-        //다음 좌표값을 정해주고
-        int nx = x + dx[k];
-        int ny = y + dy[k];
-        //다음 방향이 범위 내에 있다면
-        if (0 <= nx && nx < N && 0 <= ny && ny < M) {
-            //그 방향이 배추가 있고, 방문하지 않았다면
-            if (mp[nx][ny] && !visit[nx][ny]) {
-                visit[nx][ny] = true;
-                //탐색
-                dfs(nx, ny);
-            }
+        if (i + dy[k] < 0 || i + dy[k] >= n || j + dx[k] < 0 || j + dx[k] >= n) continue; //범위 체크
+        if (graph[i + dy[k]][j + dx[k]] == 1) { //근처 방을 탐색을 하는 것
+            dfs(i + dy[k], j + dx[k]);
         }
     }
 }
 
-//초기화
-void init() {
-    //지렁이초기화
-    cnt = 0;
-    //맵 초기화
-    for (int i = 0; i < N; i++) {
-        for (int j = 0; j < M; j++) {
-            mp[i][j] = 0;
-            visit[i][j] = false;
-        }
-    }
-}
+// int main() {
+//     cin >> n;
 
-int main() {
-    //테스트 케이스 입력
-    cin >> T;
+//     for (int i = 0; i < n; i++) {
+//         for (int j = 0; j < n; j++) {
+//             scanf("%1d", &graph[i][j]); //그래프 초기화
+//         }
+//     }
 
-    //테스트 케이스 대로 입력을 받음
-    while (T--) {
-        //초기화
-        init();
-        cin >> M >> N >> K;
-        //배추가 있는 좌표 입력
-        for (int i = 0; i < K; i++) {
-            //가로, 세로 입력순
-            cin >> column >> row;
-            if (0 <= column && column < M && 0 <= row && row < N) {
-                mp[row][column] = 1;
-            }
-        }
-        //세로의 길이
-        for (int i = 0; i < N; i++) {
-            //가로의 길이
-            for (int j = 0; j < M; j++) {
-                //배추가 심어져 있는 곳부터 dfs탐색시작
-                if (mp[i][j] && !visit[i][j]) {
-                    dfs(i, j);
-                    //지렁이 추가
-                    cnt++;
-                }
 
-            }
-        }
-        //지렁이 출력
-        cout << cnt << endl;
-    }
-    return 0;
+//     for (int i = 0; i < n; i++) {
+//         for (int j = 0; j < n; j++) {
+//             if (graph[i][j] == 1) {
+//                 room = 0;
+//                 dfs(i, j);
+//                 vc.push_back(room);
+//             }
+//         }
+//     }
+
+//     sort(vc.begin(), vc.end());
+//     cout << vc.size() << "\n";
+
+//     for (int i : vc) {
+//         cout << i << "\n";
+//     }
+
+// }
+
+void dfs(int i, int j){
+    
 }
