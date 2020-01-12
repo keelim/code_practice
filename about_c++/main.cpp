@@ -3,39 +3,45 @@
 #include <vector>
 
 using namespace std;
+vector<int> graph[1001]; //c++ 동적으로 변수 안됨
+int node, edge, answer = 0;
+bool visited[1001];
 
-int answer = 0; // 값
-bool visited[101];
-vector<int> graph[101];
 
-void dfs(int start){
-    if(visited[start]) return;
+void dfs(int start) {
+    visited[start] = 0;
 
-    visited[start] = true;
-    answer++;
     for(int y : graph[start]){
         if(!visited[y]) dfs(y);
     }
 }
 
-int main()
-{
-    int node, edge, start = 1;
+int main() {
     cin >> node >> edge;
 
-
-    for (auto i = 0; i < edge; i++)
-    {
+    for (int i = 0; i < edge; i++) {
         int head, tail;
         cin >> head >> tail;
         graph[head].push_back(tail);
         graph[tail].push_back(head);
     }
 
-    for (auto i = 1; i <= node; i++)
-    {
-        sort(graph[i].begin(), graph[i].end());
+    for (int i = 1; i <= node; i++) {
+        sort(graph[i].begin(), graph[i].begin());
     }
-    dfs(start);
+
+    for (int i = 1; i <= node; i++) {
+        visited[i] = false;
+    }
+
+
+    for (int i = 1; i <= node; i++) {
+        if(!visited[i]){
+            dfs(i);
+            answer++;
+        }
+    }
     cout<<answer;
+
+
 }
