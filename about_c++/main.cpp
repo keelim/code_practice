@@ -1,47 +1,21 @@
 #include <iostream>
-#include <algorithm>
-#include <vector>
 
 using namespace std;
-vector<int> graph[1001]; //c++ 동적으로 변수 안됨
-int node, edge, answer = 0;
-bool visited[1001];
+int memo[41] = {1, 1,};
 
-
-void dfs(int start) {
-    visited[start] = 0;
-
-    for(int y : graph[start]){
-        if(!visited[y]) dfs(y);
-    }
+int fibonacci(int n) {
+    if (n <= 1) return memo[n];        // 1 or 0 인 경우 바로 돌려준다.
+    else if (memo[n] > 0) return memo[n];    // 기존에 있던 값이면 저장을 한다.
+    return memo[n] = fibonacci(n - 1) + fibonacci(n - 2);    // 없는 값이면 저장을 하면서 돌려준다.
 }
 
 int main() {
-    cin >> node >> edge;
-
-    for (int i = 0; i < edge; i++) {
-        int head, tail;
-        cin >> head >> tail;
-        graph[head].push_back(tail);
-        graph[tail].push_back(head);
+    int testCase, num;
+    cin >> testCase;
+    for (int i = 0; i < testCase; i++) {
+        cin >> num;
+        if (num == 0) cout << "1 0\n";
+        else cout << fibonacci(num - 2) << " " << fibonacci(num - 1) << "\n";
     }
-
-    for (int i = 1; i <= node; i++) {
-        sort(graph[i].begin(), graph[i].begin());
-    }
-
-    for (int i = 1; i <= node; i++) {
-        visited[i] = false;
-    }
-
-
-    for (int i = 1; i <= node; i++) {
-        if(!visited[i]){
-            dfs(i);
-            answer++;
-        }
-    }
-    cout<<answer;
-
-
+    return 0;
 }
