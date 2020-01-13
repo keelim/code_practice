@@ -1,72 +1,63 @@
-import java.util.*;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Scanner;
 
 public class Main {
-
-    static int[][] array;
-    static boolean[][] visited;
-    static int[] dx = {-1, 0, 1, 0};
-    static int[] dy = {0, -1, 0, 1};
     static int first;
     static int second;
+    static int[] dx = {1, -1, 0, 0};
+    static int[] dy = {0, 0, 1, -1};
+    static int[][] graph;
+    static boolean[][] visited;
+    static int wall;
+    static Queue<Pair<Integer, Integer>> queue;
 
-    public static void main(String args[]) throws Exception {
-        // Scanner sc = new Scanner(System.in);
+    public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-
         first = sc.nextInt();
         second = sc.nextInt();
-        sc.nextLine();
-        array = new int[first][second];
+
+        graph = new int[first][second];
         visited = new boolean[first][second];
-        for (int i = 0; i < first; i++) {
-            String str = sc.nextLine();
+
+        for (int i = first - 1; i >= 0; i--) {
+            String[] temp = sc.next().split("");
             for (int j = 0; j < second; j++) {
-                array[i][j] = str.charAt(j) - '0';
-                visited[i][j] = false;
+                graph[i][j] = Integer.parseInt(temp[j]);
             }
-        }
-        visited[0][0] = true;
-        BFS(0, 0);
-        System.out.println(array[first - 1][second - 1]);
+        } // 그래프 초기화
+
+        bfs();
+        System.out.println(wall);
     }
 
-    static public void BFS(int x, int y) {
+    static void bfs() {
+        queue = new LinkedList<>();
 
-        Queue<Dot> q = new LinkedList<Dot>();
-        q.add(new Dot(x, y));
-        //큐가 끝날때 까지
-        while (!q.isEmpty()) {
-            Dot d = q.poll();
+        queue.add(new Pair(0, 0));
+
+        while (!queue.isEmpty()) {
+            Pair<Integer, Integer> element = queue.poll();
+            visited[element.left][element.right] = true;
             for (int i = 0; i < 4; i++) {
-                //다음 방문할 좌표 nextX, nextY
-                int nextX = d.x + dx[i];
-                int nextY = d.y + dy[i];
+                int nx = element.left + dx[i];
+                int ny = element.right + dy[i];
 
-                //다음 좌표가 범위를 넘어갈때 건너뛰기
-                if (nextX < 0 || nextY < 0 || nextX >= first || nextY >= second) {
-                    continue;
-                }
-                //이미 방문했던 점이면 건너뛰기
-                if (visited[nextX][nextY] || array[nextX][nextY] == 0) {
-                    continue;
-                }
-                //다음에 방문할 좌표를 큐에 넣는다.
-                q.add(new Dot(nextX, nextY));
-                //배열안에 다음 방문할 곳은 현재 방문했던 점보다 1칸 더 가야하므로 +1
-                array[nextX][nextY] = array[d.x][d.y] + 1;
-                //다음 좌표는 방문했음으로 표시
-                visited[nextX][nextY] = true;
+                if (nx < 0 || nx >= first || ny < 0 || ny >= second) continue;
+                if (visited[nx][ny]) continue;
+
+                queue.add(new Pair<>(nx, ny));
             }
         }
     }
-}
 
-class Dot {
-    int x;
-    int y;
+    static class Pair<L, R> {
+        L left;
+        R right;
 
-    Dot(int x, int y) {
-        this.x = x;
-        this.y = y;
+        public Pair(L left, R right) {
+            this.left = left;
+            this.right = right;
+        }
     }
 }

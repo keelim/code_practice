@@ -1,21 +1,54 @@
-#include <iostream>
+#include<iostream>
+#include<queue>
 
 using namespace std;
-int memo[41] = {1, 1,};
+#define MAX_SIZE 101
+int N, M;
+char map[MAX_SIZE][MAX_SIZE];
+bool visit[MAX_SIZE][MAX_SIZE];
+int dx[4] = {1, -1, 0, 0};    //동 서 남 북
+int dy[4] = {0, 0, -1, 1};    //동 서 남 북
 
-int fibonacci(int n) {
-    if (n <= 1) return memo[n];        // 1 or 0 인 경우 바로 돌려준다.
-    else if (memo[n] > 0) return memo[n];    // 기존에 있던 값이면 저장을 한다.
-    return memo[n] = fibonacci(n - 1) + fibonacci(n - 2);    // 없는 값이면 저장을 하면서 돌려준다.
+int bfs() {
+    queue<pair<pair<int, int>, int>> q;
+    q.push(make_pair(make_pair(0, 0), 1));    //첫째pair 위치, 둘째pair 움직인거리
+    visit[0][0] = 1;
+
+    while (!q.empty()) {
+        int x = q.front().first.second;
+        int y = q.front().first.first;
+        int z = q.front().second;
+
+        q.pop();
+
+        if (x == M - 1 && y == N - 1)
+            return z;
+
+        for (int i = 0; i < 4; i++) {
+            int nx = x + dx[i];
+            int ny = y + dy[i];
+
+            if (nx < 0 || ny < 0 || nx >= M || ny >= N)
+                continue;
+            if (visit[ny][nx] == 1)
+                continue;
+            if (map[ny][nx] != '1')
+                continue;
+
+            q.push(make_pair(make_pair(ny, nx), z + 1));
+            visit[ny][nx] = 1;
+        }
+    }
 }
 
 int main() {
-    int testCase, num;
-    cin >> testCase;
-    for (int i = 0; i < testCase; i++) {
-        cin >> num;
-        if (num == 0) cout << "1 0\n";
-        else cout << fibonacci(num - 2) << " " << fibonacci(num - 1) << "\n";
+
+    cin >> N >> M;
+
+    for (int i = 0; i < N; i++) {
+        cin >> map[i];
     }
+    cout << bfs();
+
     return 0;
 }
