@@ -1,41 +1,36 @@
 #include <iostream>
-#include <algorithm>
-#include <vector>
-
+#include <queue>
 using namespace std;
+int width;
+int height;
+int graph[1001][1001];
+int day;
+queue<>
 
-int answer = 0; // 값
-bool visited[101];
-vector<int> graph[101];
+int dx[] = {
+    1,
+    -1,
+    0,
+    0,
+};
+int dy[] = {0, 0, 1, -1};
 
-void dfs(int start){
-    if(visited[start]) return;
+void bfs(){
 
-    visited[start] = true;
-    answer++;
-    for(int y : graph[start]){
-        if(!visited[y]) dfs(y);
-    }
 }
 
 int main()
 {
-    int node, edge, start = 1;
-    cin >> node >> edge;
+    cin >> width >> height;
+    memset(graph, -2, sizeof(graph)); //초기화
 
-
-    for (auto i = 0; i < edge; i++)
+    for (auto i = 0; i < height; i++)
     {
-        int head, tail;
-        cin >> head >> tail;
-        graph[head].push_back(tail);
-        graph[tail].push_back(head);
+        for (auto j = 0; j < width; j++)
+        {
+            cin >> graph[i][j];
+        }
     }
 
-    for (auto i = 1; i <= node; i++)
-    {
-        sort(graph[i].begin(), graph[i].end());
-    }
-    dfs(start);
-    cout<<answer-1;
+    bfs();
 }
