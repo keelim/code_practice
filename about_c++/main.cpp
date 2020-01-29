@@ -1,36 +1,19 @@
 #include <iostream>
-#include <queue>
+#include <algorithm>
 using namespace std;
-int width;
-int height;
-int graph[1001][1001];
-int day;
-queue<>
 
-int dx[] = {
-    1,
-    -1,
-    0,
-    0,
-};
-int dy[] = {0, 0, 1, -1};
+int input;
+int dp[1000001];
 
-void bfs(){
+int main(){
+    cin>>input;
 
-}
-
-int main()
-{
-    cin >> width >> height;
-    memset(graph, -2, sizeof(graph)); //초기화
-
-    for (auto i = 0; i < height; i++)
+    dp[1] = 0;
+    for (auto i = 2; i <= input; i++)
     {
-        for (auto j = 0; j < width; j++)
-        {
-            cin >> graph[i][j];
-        }
+        dp[i] = dp[i-1]+1;
+        if(i%2==0) dp[i] = min(dp[i], dp[i/2]+1);
+        if(i%3==0) dp[i] = min(dp[i], dp[i/3]+1);
     }
-
-    bfs();
+    cout<<dp[input];
 }
