@@ -176,12 +176,9 @@ public class TreeFactory{
     - 추상 클래스를 정의를 하고 상속을 받아서 사용을 하는 것
     
     
-    
-    
 ```java
 BufferedReader br = null;
 br = new BufferedReader(new FileReader(new File("test.txt")));
-
 ```
 
 ## 2019 08 19
@@ -203,7 +200,6 @@ br = new BufferedReader(new FileReader(new File("test.txt")));
 > 존슨 트로터 알고리즘 ?
     
     - 최소 변경 순서 알고리즘 
-    - 
 > for loop 
 
 > 부분집합 // 배낭집합
@@ -211,3 +207,12 @@ br = new BufferedReader(new FileReader(new File("test.txt")));
 > 바이너리 카운팅 Lexicographic order
 
 > 조합 / 순열 
+
+- - - 
+1. 완전 탐색
+2. 백트랙킹
+3. 다이나믹 프로그래밍
+4. dfs, bfs
+5. 그리디
+6. 분할정복
+7. 문자열

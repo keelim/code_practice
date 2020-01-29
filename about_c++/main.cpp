@@ -1,19 +1,76 @@
 #include <iostream>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <math.h>
 #include <algorithm>
+
 using namespace std;
 
-int input;
-int dp[1000001];
+#define MAX 101
 
-int main(){
-    cin>>input;
+int N;
+int min_value = MAX;
+int max_value = 0;
+int arr[MAX][MAX];
+bool visit[MAX][MAX] = {
+    false,
+};
 
-    dp[1] = 0;
-    for (auto i = 2; i <= input; i++)
+int dx[] = {0, 0, 1, -1};
+int dy[] = {1, -1, 0, 0};
+
+void dfs(int x, int y, int height)
+{
+    for (int i = 0; i < 4; i++)
     {
-        dp[i] = dp[i-1]+1;
-        if(i%2==0) dp[i] = min(dp[i], dp[i/2]+1);
-        if(i%3==0) dp[i] = min(dp[i], dp[i/3]+1);
+        int nx = x + dx[i];
+        int ny = y + dy[i];
+
+        if (nx < 0 || ny < 0 || nx >= N || ny >= N)
+            continue;
+        if (arr[nx][ny] <= height || visit[nx][ny])
+            continue;
+
+        visit[nx][ny] = true;
+        dfs(nx, ny, height);
+        
     }
-    cout<<dp[input];
+}
+
+int main()
+{
+    int result = 1;
+    cin >> N;
+    for (int i = 0; i < N; i++)
+    {
+        for (int j = 0; j < N; j++)
+        {
+            cin >> arr[i][j];
+            min_value = min(min_value, arr[i][j]);
+            max_value = max(max_value, arr[i][j]);
+        }
+    }
+
+    for (int i = min_value; i < max_value; i++)
+    {
+        int cnt = 0;
+        memset(visit, false, sizeof(visit));
+
+        for (int j = 0; j < N; j++)
+        {
+            for (int k = 0; k < N; k++)
+            {
+                if (arr[j][k] > i && !visit[j][k])
+                {
+                    visit[j][k] = true;
+                    cnt++;
+                    dfs(j, k, i);
+                }
+            }
+        }
+        result = max(result, cnt);
+    }
+    cout << result;
+    return 0;
 }
