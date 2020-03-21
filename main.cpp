@@ -3,24 +3,37 @@
 
 using namespace std;
 
-int max(int a, int b) {if(a>b) return a; return b;}
-
-vector<int> solution(vector<int> heights){
+vector<int> solution(vector<int> progresses, vector<int> speeds) {
     vector<int> answer;
-    answer.push_back(0);
-
-    for(int i=1; i<heights.size();i++){
-        int send = heights[i];
-        int max = 0;
-        for (int j = i-1; j >=0; j++){
-            int compare = heights[j];
-            if(compare>send){
-                max = j+1;
-                break;
-            }
+    
+    vector<int> days;
+    for(int i=0; i<progresses.size();i++){
+        int temp = 100 - progresses[i];
+        int count=0;
+        while(temp<0){
+            temp-=speeds[i];
+            count++;
         }
-        answer.push_back(max);
+        days.push_back(count);
+        // 7 3 9
     }
+    for(int i=1; i<days.size();i++){
+        if(days[i-1]>days[i]) days[i] = days[i-1];
+        // 7 7 9
+    }
+    int count =1;
+    for (int i = 1; i < days.size()-1; i++)
+    {
+        if(days[i]==days[i-1]){
+            count++;
+        } else{
+            answer.push_back(count);
+            count=1;
+        }
+    }
+    answer.push_back(count);
+    
+
 
     return answer;
 }
