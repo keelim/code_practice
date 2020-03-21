@@ -1,39 +1,35 @@
 #include <string>
 #include <vector>
+#include <algorithm>
+#include <iostream>
 
 using namespace std;
+vector<pair<int, int>> hello; 
 
-vector<int> solution(vector<int> progresses, vector<int> speeds) {
-    vector<int> answer;
-    
-    vector<int> days;
-    for(int i=0; i<progresses.size();i++){
-        int temp = 100 - progresses[i];
-        int count=0;
-        while(temp<0){
-            temp-=speeds[i];
-            count++;
-        }
-        days.push_back(count);
-        // 7 3 9
+bool compare(pair<int, int> a, pair<int, int> b){
+    if(a.first==b.first){
+        return a.second>b.second;
     }
-    for(int i=1; i<days.size();i++){
-        if(days[i-1]>days[i]) days[i] = days[i-1];
-        // 7 7 9
+    return a.first>b.first;
+}
+
+int solution(vector<int> priorities, int location) {
+    int answer = 0;
+
+    for(int i=0; i<priorities.size();i++){
+        hello.push_back(make_pair(priorities[i], i));
     }
-    int count =1;
-    for (int i = 1; i < days.size()-1; i++)
-    {
-        if(days[i]==days[i-1]){
-            count++;
-        } else{
-            answer.push_back(count);
-            count=1;
+    hello[location] = make_pair(priorities[location], -1);
+    sort(hello.begin(), hello.end(), compare);
+
+
+    for(int i=0; i<hello.size(); i++){
+        cout<<hello[i].first<<hello[i].second<<"\n";
+        if(hello[i].second == 1){
+            answer = i+1;
         }
     }
-    answer.push_back(count);
+
     
-
-
     return answer;
 }
