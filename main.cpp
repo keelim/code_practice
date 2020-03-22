@@ -4,17 +4,28 @@
 #include <iostream>
 using namespace std;
 
-vector<int> solution(vector<int> array, vector<vector<int>> commands) {
-    vector<int> answer;
-    for(int i=0; i < commands.size(); i++){
-        vector<int> set = commands[i];
-        vector<int> temp;
-        temp.assign( array.begin() + set[0] - 1, array.begin() + set[1]);
+string solution(vector<int> numbers) {
+    string answer = "";
+    int max = 0;
 
-        sort(temp.begin(), temp.end());
+    do{
+        // string temp ="";
+        
+        // for(int i=0; i<numbers.size(); i++){
+        //     temp.append(to_string(numbers[i]));
+        //     int value = stoi(temp);
+        //     if(value>max) max = value;
 
-        answer.push_back( temp[set[2] - 1]);
-    }
+        // }
+
+        for(int i=0;i<numbers.size();i++){
+            cout<<numbers[i];
+        }
+        cout<<"\n";
+    } while(next_permutation(numbers.begin(), numbers.end()));
+    
+    answer = to_string(max);
+
 
     return answer;
 }
