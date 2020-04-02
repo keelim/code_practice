@@ -1,108 +1,75 @@
-#include<iostream>
-#include<string>
-#include<queue>
- 
+#include <iostream>
+#include <string>
+#include <queue>
+
 using namespace std;
- 
-int N, M, Answer;
-int MAP[101][101];
-int Dist[101][101];
-bool Visit[101][101];
- 
-int dx[] = { 0, 0, 1, -1 };
-int dy[] = { 1, -1, 0, 0 };
- 
-void Input()
+
+int N, M, answer;
+int map[101][101];
+int dis[101][101];
+bool visited[101][101];
+
+int dx[] = {0, 0, 1, -1};
+int dy[] = {1, -1, 0, 0};
+
+
+void BFS(int a, int b) //여기 부터는 이해를 할 필요가 있다.
 {
-    Answer = 987654321;
-    cin >> N >> M;
-    for (int i = 0; i < M; i++)
-    {
-        string Inp;
-        cin >> Inp;
-        for (int j = 0; j < Inp.length(); j++)
-        {
-            MAP[i][j] = Inp[j] - '0';
-            Dist[i][j] = 987654321;
-        }
-    }
+	queue<pair<int, int>> Q;
+	Q.push(make_pair(a, b));
+	dis[a][b] = 0;
+
+	while (Q.empty() == 0)
+	{
+		int x = Q.front().first;
+		int y = Q.front().second;
+		Q.pop();
+
+		for (int i = 0; i < 4; i++)
+		{
+			int nx = x + dx[i];
+			int ny = y + dy[i];
+
+			if (nx < 0 || ny < 0 || nx >= M || ny >= N)
+				continue;
+
+			if (map[nx][ny] == 1)
+			{
+				if (dis[nx][ny] > dis[x][y] + 1)
+				{
+					dis[nx][ny] = dis[x][y] + 1;
+					Q.push(make_pair(nx, ny));
+				}
+			}
+			else if (map[nx][ny] == 0)
+			{
+				if (dis[nx][ny] > dis[x][y])
+				{
+					dis[nx][ny] = dis[x][y];
+					Q.push(make_pair(nx, ny));
+				}
+			}
+		}
+	}
 }
- 
-void Print()
-{
-    cout << "#############################" << endl;
-    for (int i = 0; i < M; i++)
-    {
-        for (int j = 0; j < N; j++)
-        {
-            cout << Dist[i][j] << " ";
-        }
-        cout << endl;
-    }
-    cout << "#############################" << endl;
- 
-}
- 
-void BFS(int a, int b)
-{
-    queue<pair<int, int>> Q;
-    Q.push(make_pair(a, b));
-    Dist[a][b] = 0;
- 
-    while (Q.empty() == 0)
-    {
-        //Print();
-        int x = Q.front().first;
-        int y = Q.front().second;
-        Q.pop();
-            
-        for (int i = 0; i < 4; i++)
-        {
-            int nx = x + dx[i];
-            int ny = y + dy[i];
-                
-            if (nx < 0 || ny < 0 || nx >= M || ny >= N) continue;
-            
-            if (MAP[nx][ny] == 1)
-            {
-                if (Dist[nx][ny] > Dist[x][y] + 1)
-                {
-                    Dist[nx][ny] = Dist[x][y] + 1;
-                    Q.push(make_pair(nx, ny));
-                }
-            }
-            else if (MAP[nx][ny] == 0)
-            {
-                if (Dist[nx][ny] > Dist[x][y])
-                {
-                    Dist[nx][ny] = Dist[x][y];
-                    Q.push(make_pair(nx, ny));
-                }
-            }
-        }
-    }
-}
- 
-void Solution()
-{
-    BFS(0, 0);
-    cout << Dist[M-1][N-1] << endl;
-}
- 
-void Solve()
-{
-    Input();
-    Solution();
-}
- 
+
 int main(void)
 {
-    ios::sync_with_stdio(false);
-    cin.tie(NULL);
-    cout.tie(NULL);
- 
-    //freopen("Input.txt", "r", stdin);
-    Solve();
- 
-    return 0;
+
+	answer = 987654321;
+	cin >> N >> M;
+	for (int i = 0; i < M; i++)
+	{
+		string temp;
+		cin >> temp;
+		for (int j = 0; j < temp.length(); j++)
+		{
+			map[i][j] = temp[j] - '0'; // 이것은 기억을 해둘 필요가 있다.
+			dis[i][j] = 987654321;
+		}
+	}
+
+	BFS(0, 0);
+	cout << dis[M - 1][N - 1] << "\n";
+
 }
