@@ -1,29 +1,108 @@
-#include <iostream>
-#include <cstring>
-
+#include<iostream>
+#include<string>
+#include<queue>
+ 
 using namespace std;
-
-int min (int a, int b){
-	
-}
-
-int main()
+ 
+int N, M, Answer;
+int MAP[101][101];
+int Dist[101][101];
+bool Visit[101][101];
+ 
+int dx[] = { 0, 0, 1, -1 };
+int dy[] = { 1, -1, 0, 0 };
+ 
+void Input()
 {
-	int a, b;
-	int answer = 0;
-	cin >> a >> b;
-
-	while(a!=b){
-		answer++;
-		//a 연산하고
-		int a1, a2, a3;
-		a1 = a+1;
-		a2 = a-1;
-		a3 = 2*a;
-
-		// 차이 비교하여 제일 차이가 작은 거 a
-	}
-
-	cout<<answer<<"\n";
-
+    Answer = 987654321;
+    cin >> N >> M;
+    for (int i = 0; i < M; i++)
+    {
+        string Inp;
+        cin >> Inp;
+        for (int j = 0; j < Inp.length(); j++)
+        {
+            MAP[i][j] = Inp[j] - '0';
+            Dist[i][j] = 987654321;
+        }
+    }
+}
+ 
+void Print()
+{
+    cout << "#############################" << endl;
+    for (int i = 0; i < M; i++)
+    {
+        for (int j = 0; j < N; j++)
+        {
+            cout << Dist[i][j] << " ";
+        }
+        cout << endl;
+    }
+    cout << "#############################" << endl;
+ 
+}
+ 
+void BFS(int a, int b)
+{
+    queue<pair<int, int>> Q;
+    Q.push(make_pair(a, b));
+    Dist[a][b] = 0;
+ 
+    while (Q.empty() == 0)
+    {
+        //Print();
+        int x = Q.front().first;
+        int y = Q.front().second;
+        Q.pop();
+            
+        for (int i = 0; i < 4; i++)
+        {
+            int nx = x + dx[i];
+            int ny = y + dy[i];
+                
+            if (nx < 0 || ny < 0 || nx >= M || ny >= N) continue;
+            
+            if (MAP[nx][ny] == 1)
+            {
+                if (Dist[nx][ny] > Dist[x][y] + 1)
+                {
+                    Dist[nx][ny] = Dist[x][y] + 1;
+                    Q.push(make_pair(nx, ny));
+                }
+            }
+            else if (MAP[nx][ny] == 0)
+            {
+                if (Dist[nx][ny] > Dist[x][y])
+                {
+                    Dist[nx][ny] = Dist[x][y];
+                    Q.push(make_pair(nx, ny));
+                }
+            }
+        }
+    }
+}
+ 
+void Solution()
+{
+    BFS(0, 0);
+    cout << Dist[M-1][N-1] << endl;
+}
+ 
+void Solve()
+{
+    Input();
+    Solution();
+}
+ 
+int main(void)
+{
+    ios::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+ 
+    //freopen("Input.txt", "r", stdin);
+    Solve();
+ 
+    return 0;
 }
