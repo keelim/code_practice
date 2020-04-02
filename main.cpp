@@ -1,31 +1,29 @@
-#include <string>
-#include <vector>
-#include <algorithm>
 #include <iostream>
+#include <cstring>
+
 using namespace std;
 
-string solution(vector<int> numbers) {
-    string answer = "";
-    int max = 0;
+int min (int a, int b){
+	
+}
 
-    do{
-        // string temp ="";
-        
-        // for(int i=0; i<numbers.size(); i++){
-        //     temp.append(to_string(numbers[i]));
-        //     int value = stoi(temp);
-        //     if(value>max) max = value;
+int main()
+{
+	int a, b;
+	int answer = 0;
+	cin >> a >> b;
 
-        // }
+	while(a!=b){
+		answer++;
+		//a 연산하고
+		int a1, a2, a3;
+		a1 = a+1;
+		a2 = a-1;
+		a3 = 2*a;
 
-        for(int i=0;i<numbers.size();i++){
-            cout<<numbers[i];
-        }
-        cout<<"\n";
-    } while(next_permutation(numbers.begin(), numbers.end()));
-    
-    answer = to_string(max);
+		// 차이 비교하여 제일 차이가 작은 거 a
+	}
 
+	cout<<answer<<"\n";
 
-    return answer;
 }
