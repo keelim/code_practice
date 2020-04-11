@@ -1,75 +1,162 @@
 #include <iostream>
-#include <string>
-#include <queue>
 
 using namespace std;
 
-int N, M, answer;
-int map[101][101];
-int dis[101][101];
-bool visited[101][101];
+int n, m, answer = 987654321;
+char MAP[11][11];
 
 int dx[] = {0, 0, 1, -1};
 int dy[] = {1, -1, 0, 0};
 
+pair<int, int> Red, Blue;
 
-void BFS(int a, int b) //여기 부터는 이해를 할 필요가 있다.
+int Min(int A, int B)
 {
-	queue<pair<int, int>> Q;
-	Q.push(make_pair(a, b));
-	dis[a][b] = 0;
+    if (A < B)
+        return A;
+    return B;
+}
 
-	while (Q.empty() == 0)
-	{
-		int x = Q.front().first;
-		int y = Q.front().second;
-		Q.pop();
+int Move_Dist(int x, int y, int xx, int yy)
+{
+    return abs(x - xx) + abs(y - yy);
+}
 
-		for (int i = 0; i < 4; i++)
-		{
-			int nx = x + dx[i];
-			int ny = y + dy[i];
+int Inverse_Direction(int Cur_D)
+{
+    if (Cur_D == 0)
+        return 1;
+    else if (Cur_D == 1)
+        return 0;
+    else if (Cur_D == 2)
+        return 3;
+    else if (Cur_D == 3)
+        return 2;
+}
 
-			if (nx < 0 || ny < 0 || nx >= M || ny >= N)
-				continue;
+void Move(int Rx, int Ry, int Bx, int By, int Cnt, int dir)
+{
+    if (Cnt >= answer)
+        return;
+    if (Cnt > 10)
+        return;
 
-			if (map[nx][ny] == 1)
-			{
-				if (dis[nx][ny] > dis[x][y] + 1)
-				{
-					dis[nx][ny] = dis[x][y] + 1;
-					Q.push(make_pair(nx, ny));
-				}
-			}
-			else if (map[nx][ny] == 0)
-			{
-				if (dis[nx][ny] > dis[x][y])
-				{
-					dis[nx][ny] = dis[x][y];
-					Q.push(make_pair(nx, ny));
-				}
-			}
-		}
-	}
+    bool Red_Flag = false;
+    bool Blue_Flag = false;
+
+    int nRx = Rx + dx[dir];
+    int nRy = Ry + dy[dir];
+    while (1)
+    {
+        if (MAP[nRx][nRy] == '#')
+            break;
+        if (MAP[nRx][nRy] == 'O')
+        {
+            Red_Flag = true;
+            break;
+        }
+        nRx = nRx + dx[dir];
+        nRy = nRy + dy[dir];
+    }
+    nRx = nRx - dx[dir];
+    nRy = nRy - dy[dir];
+
+    int nBx = Bx + dx[dir];
+    int nBy = By + dy[dir];
+
+    while (1)
+    {
+        if (MAP[nBx][nBy] == '#')
+            break;
+
+        if (MAP[nBx][nBy] == 'O')
+        {
+            Blue_Flag = true;
+            break;
+        }
+        nBx = nBx + dx[dir];
+        nBy = nBy + dy[dir];
+    }
+    nBx = nBx - dx[dir];
+    nBy = nBy - dy[dir];
+
+    if (Blue_Flag == true)
+        return;
+    else
+    {
+        if (Red_Flag == true)
+        {
+            answer = Min(answer, Cnt);
+            return;
+        }
+    }
+
+    if (nRx == nBx && nRy == nBy)
+    {
+        int Red_Dist = Move_Dist(Rx, Ry, nRx, nRy);
+        int Blue_Dist = Move_Dist(Bx, By, nBx, nBy);
+
+        if (Red_Dist > Blue_Dist)
+        {
+            nRx = nRx - dx[dir];
+            nRy = nRy - dy[dir];
+        }
+        else
+        {
+            nBx = nBx - dx[dir];
+            nBy = nBy - dy[dir];
+        }
+    }
+
+    for (int i = 0; i < 4; i++)
+    {
+        if (i == dir)
+            continue;
+        if (i == Inverse_Direction(dir))
+            continue;
+
+        Move(nRx, nRy, nBx, nBy, Cnt + 1, i);
+    }
 }
 
 int main(void)
 {
 
-	answer = 987654321;
-	cin >> N >> M;
-	for (int i = 0; i < M; i++)
-	{
-		string temp;
-		cin >> temp;
-		for (int j = 0; j < temp.length(); j++)
-		{
-			map[i][j] = temp[j] - '0'; // 이것은 기억을 해둘 필요가 있다.
-			dis[i][j] = 987654321;
-		}
-	}
+    cin >> n >> m;
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < m; j++)
+        {
+            cin >> MAP[i][j];
+            if (MAP[i][j] == 'R')
+            {
+                Red.first = i;
+                Red.second = j;
+                MAP[i][j] = '.';
+            }
+            else if (MAP[i][j] == 'B')
+            {
+                Blue.first = i;
+                Blue.second = j;
+                MAP[i][j] = '.';
+            }
+        }
+    }
 
-	BFS(0, 0);
-	cout << dis[M - 1][N - 1] << "\n";
+    for (int i = 0; i < 4; i++)
+    {
+        int x = Red.first;
+        int y = Red.second;
+        int xx = Blue.first;
+        int yy = Blue.second;
 
+        Move(x, y, xx, yy, 1, i);
+    }
+
+    if (answer > 10 || answer == 987654321) answer= -1;
+    if(answer>10) cout<<1<<"\n"    ;
+    else cout<<0<<"\n";
+    
+
+    return 0;
 }
