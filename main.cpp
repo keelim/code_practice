@@ -1,32 +1,100 @@
 #include <iostream>
 #include <algorithm>
 using namespace std;
- 
-int D[16];
-int T[16];
-int P[16];
-int n, ans;
- 
-//dp의 경우
-int dp(int day){
-    if(day == n+1) return 0;
-    //날짜가 n+1보다 크다면 -값을 크게 준다.
-    if(day > n+1) return -987654321;
-    //메모이제이션
-    if(D[day] > 0) return D[day];
-    //점화식 상담을 안한다 혹은 상담을 한다. 둘 중 하나를 고른다.
-    return D[day] = max(dp(day+1), dp(day+T[day])+P[day]); //재귀가 들어감
+
+int n, m, ans;
+int map[501][501];
+bool visited[501][501] = { //memset 안써도 된다.
+    false,
+};
+
+int dx[4] = {0, 0, 1, -1};
+int dy[4] = {1, -1, 0, 0};
+
+int exception_case[4][4][2] = {
+    {{0, 0}, {0, -1}, {0, 1}, {-1, 0}},
+    {{0, 0}, {-1, 0}, {1, 0}, {0, 1}},
+    {{0, 0}, {0, -1}, {0, 1}, {1, 0}},
+    {{0, 0}, {-1, 0}, {1, 0}, {0, -1}}};
+
+void dfs(int x, int y, int cnt, int sum)
+{
+    // 테트로미노를 만든 경우
+    if (cnt == 4)
+    {
+        ans = max(ans, sum);
+        return;
+    }
+
+    for (int i = 0; i < 4; i++)
+    {
+        int nx = x + dx[i];
+        int ny = y + dy[i];
+
+        if (nx < 0 || ny < 0 || nx >= n || ny >= m) continue;
+            
+        if (!visited[nx][ny])
+        {
+            visited[nx][ny] = true;
+            dfs(nx, ny, cnt + 1, sum + map[nx][ny]);
+            visited[nx][ny] = false;
+        }
+    }
 }
 
- 
-int main(){
-    cin >> n;
-    for(int i = 1; i <= n; i++)
-        cin >> T[i] >> P[i];
+// 'ㅗ' 의 경우 예외처리
+// 4방향 x 정사각형 4개
+void getExceptionCase(int x, int y)
+{
+    for (int i = 0; i < 4; i++)
+    {
+        bool flag = true;
+        int sum = 0;
 
-    // 입력을 하는 부분
-    cout << dp(1)<<"\n";
+        for (int j = 0; j < 4; j++)
+        {
+            int nx = x + exception_case[i][j][0];
+            int ny = y + exception_case[i][j][1];
 
-    return 0;
+            if (nx < 0 || ny < 0 || nx >= n || ny >= m)
+            {
+                flag = false;
+                break;
+            }
+
+            sum += map[nx][ny];
+        }
+
+        if (flag)
+            ans = max(ans, sum);
+    }
 }
 
+int main(int argc, const char *argv[])
+{
+    cin >> n >> m;
+
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < m; j++)
+        {
+            cin >> map[i][j];
+        }
+    } //입력
+    ans = 0;
+
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < m; j++)
+        {
+            visited[i][j] = true;
+            dfs(i, j, 1, map[i][j]);
+            visited[i][j] = false;
+
+            // 'ㅗ' 의 경우 예외처리
+            getExceptionCase(i, j); //새로운 dfs
+        }
+    }
+
+    cout << ans << "\n";
+}
