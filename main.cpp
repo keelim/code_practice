@@ -1,33 +1,56 @@
 #include <iostream>
+#include <queue>
+
 using namespace std;
 
-int solution(int n)
+int adj[101][101];
+int visited[101][101];
+queue<pair<int, int>> q;
+int num;
+
+void bfs(int x, int y)
 {
-    int sum = n;
-    while (n)
+
+    visited[x][y] = 1;
+    q.push(make_pair(x, y));
+
+    while (!q.empty())
     {
-        sum += n % 10;
-        n /= 10;
+
+        for (int i = 0; i < num; i++)
+            if (adj[q.front().second][i] && !visited[x][i])
+            {
+                visited[x][i] = 1;
+                q.push(make_pair(q.front().second, i));
+            }
+        q.pop();
     }
-    return sum;
 }
 
-int main()
+int main(void)
 {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     cout.tie(NULL);
-    int N;
-    cin >> N;
 
-    for (int i = 1; i < N; i++)
+    cin >> num;
+
+    for (int i = 0; i < num; i++)
+        for (int j = 0; j < num; j++)
+            cin >> adj[i][j];
+    //input
+
+    for (int i = 0; i < num; i++)
+        for (int j = 0; j < num; j++)
+            if (adj[i][j])
+                bfs(i, j);
+    //solution
+
+    for (int i = 0; i < num; i++)
     {
-        int sum = solution(i);
-        if (sum == N)
-        {
-            cout << i << "\n";
-            return 0;
-        }
+        for (int j = 0; j < num; j++)
+            cout << visited[i][j] << " ";
+        cout << '\n';
     }
-    cout << 0 << "\n";
+    //output
 }
