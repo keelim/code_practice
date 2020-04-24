@@ -1,129 +1,213 @@
 #include <iostream>
 #include <vector>
-#include <cstring>
-#include <algorithm>
-#include <queue>
+#include <string>
 
 using namespace std;
 
-int n;
-int arr[11];
-int color[11];
-int red, blue;
-int redSum, blueSum;
-int ans = 987987987;
+int K;
 
-//연결선 정보
-vector<int> v[11];
-queue<int> q;
-bool check[11];
+vector<int> Wheel[4];
+vector<pair<int, int>> vc;
 
-void bfs(int c)
+
+int Reverse_Direction(int d)
 {
-    while (!q.empty())
-    {
-        int num = q.front();
-        q.pop();
+    if (d == 1)
+        return -1;
+    else
+        return 1;
+}
 
-        if (c == 1)
+void Actual_Turning(int n, int d)
+{
+    if (d == 1)
+    {
+        int Tmp = Wheel[n].at(7);
+        for (int i = 7; i > 0; i--)
         {
-            red++;
-            redSum += arr[num];
+            Wheel[n].at(i) = Wheel[n].at(i - 1);
+        }
+        Wheel[n].at(0) = Tmp;
+    }
+    else if (d == -1)
+    {
+        int Tmp = Wheel[n].at(0);
+        for (int i = 0; i < 7; i++)
+        {
+            Wheel[n].at(i) = Wheel[n].at(i + 1);
+        }
+        Wheel[n].at(7) = Tmp;
+    }
+}
+
+void Turn_Wheel(int n, int d)
+{
+    int nd = Reverse_Direction(d);
+    if (n == 0)
+    {
+        if (Wheel[n].at(2) != Wheel[n + 1].at(6))
+        {
+            if (Wheel[n + 1].at(2) != Wheel[n + 2].at(6))
+            {
+                if (Wheel[n + 2].at(2) != Wheel[n + 3].at(6))
+                {
+                    Actual_Turning(n, d);
+                    Actual_Turning(n + 1, nd);
+                    Actual_Turning(n + 2, d);
+                    Actual_Turning(n + 3, nd);
+                }
+                else
+                {
+                    Actual_Turning(n, d);
+                    Actual_Turning(n + 1, nd);
+                    Actual_Turning(n + 2, d);
+                }
+            }
+            else
+            {
+                Actual_Turning(n, d);
+                Actual_Turning(n + 1, nd);
+            }
         }
         else
         {
-            blue++;
-            blueSum += arr[num];
-        }
-
-        for (int i = 0; i < v[num].size(); i++)
-        {
-            if (check[v[num][i]] == 0 && color[v[num][i]] == c)
-            {
-                check[v[num][i]] = 1;
-                q.push(v[num][i]);
-            }
+            Actual_Turning(n, d);
         }
     }
-}
-
-void dfs(int cnt, int r, int b)
-{
-    if (cnt == n + 1)
+    else if (n == 1)
     {
-        //실행 할 곳
-        red = 0;
-        blue = 0;
-        redSum = 0;
-        blueSum = 0;
-        memset(check, 0, sizeof(check));
-
-        bool rf = false, bf = false;
-
-        // 레드진영, 블루진영 각자 끼리끼리 다 연결되었는지 확인, 및 인원체크
-        for (int i = 1; i <= n; i++)
+        if (Wheel[n].at(6) != Wheel[n - 1].at(2))
         {
-            if (rf == 1 && bf == 1)
-                break;
-            if (color[i] == 1 && check[i] == 0 && rf == 0)
-            {
-                rf = 1;
-                check[i] = 1;
-                q.push(i);
-                bfs(1);
-            }
-            else if (color[i] == 2 && check[i] == 0 && bf == 0)
-            {
-                bf = 1;
-                check[i] = 1;
-                q.push(i);
-                bfs(2);
-            }
+            Actual_Turning(n - 1, nd);
         }
 
-        //레드진영, 블루진영 연결되었는지 확인
-        if (red != r || blue != b)
-            return;
-
-        ans = min(ans, abs(redSum - blueSum));
-
-        return;
+        if (Wheel[n].at(2) != Wheel[n + 1].at(6))
+        {
+            if (Wheel[n + 1].at(2) != Wheel[n + 2].at(6))
+            {
+                Actual_Turning(n, d);
+                Actual_Turning(n + 1, nd);
+                Actual_Turning(n + 2, d);
+            }
+            else
+            {
+                Actual_Turning(n, d);
+                Actual_Turning(n + 1, nd);
+            }
+        }
+        else
+        {
+            Actual_Turning(n, d);
+        }
     }
+    else if (n == 2)
+    {
+        if (Wheel[n].at(2) != Wheel[n + 1].at(6))
+        {
+            Actual_Turning(n + 1, nd);
+        }
 
-    color[cnt] = 1;
-    dfs(cnt + 1, r + 1, b);
-
-    color[cnt] = 2;
-    dfs(cnt + 1, r, b + 1);
+        if (Wheel[n].at(6) != Wheel[n - 1].at(2))
+        {
+            if (Wheel[n - 1].at(6) != Wheel[n - 2].at(2))
+            {
+                Actual_Turning(n, d);
+                Actual_Turning(n - 1, nd);
+                Actual_Turning(n - 2, d);
+            }
+            else
+            {
+                Actual_Turning(n, d);
+                Actual_Turning(n - 1, nd);
+            }
+        }
+        else
+        {
+            Actual_Turning(n, d);
+        }
+    }
+    else if (n == 3)
+    {
+        if (Wheel[n].at(6) != Wheel[n - 1].at(2))
+        {
+            if (Wheel[n - 1].at(6) != Wheel[n - 2].at(2))
+            {
+                if (Wheel[n - 2].at(6) != Wheel[n - 3].at(2))
+                {
+                    Actual_Turning(n, d);
+                    Actual_Turning(n - 1, nd);
+                    Actual_Turning(n - 2, d);
+                    Actual_Turning(n - 3, nd);
+                }
+                else
+                {
+                    Actual_Turning(n, d);
+                    Actual_Turning(n - 1, nd);
+                    Actual_Turning(n - 2, d);
+                }
+            }
+            else
+            {
+                Actual_Turning(n, d);
+                Actual_Turning(n - 1, nd);
+            }
+        }
+        else
+        {
+            Actual_Turning(n, d);
+        }
+    }
 }
 
-int main()
+void Solution()
 {
-    ios_base::sync_with_stdio(0);
+    for (int i = 0; i < vc.size(); i++)
+    {
+        int N = vc[i].first;
+        int D = vc[i].second;
+
+        Turn_Wheel(N, D);
+    }
+
+    int Answer = 0;
+    if (Wheel[0].at(0) == 1)
+        Answer = Answer + 1;
+    if (Wheel[1].at(0) == 1)
+        Answer = Answer + 2;
+    if (Wheel[2].at(0) == 1)
+        Answer = Answer + 4;
+    if (Wheel[3].at(0) == 1)
+        Answer = Answer + 8;
+
+    cout << Answer << "\n";
+}
+
+int main(void)
+{
+    ios::sync_with_stdio(false);
     cin.tie(0);
     cout.tie(0);
 
-    cin >> n;
-    for (int i = 1; i <= n; i++)
-        cin >> arr[i];
-
-    int a, b;
-    for (int i = 1; i <= n; i++)
+    for (int i = 0; i < 4; i++)
     {
-        cin >> a;
-        for (int j = 0; j < a; j++)
+        string Inp;
+        cin >> Inp;
+        for (int j = 0; j < Inp.length(); j++)
         {
-            cin >> b;
-            v[i].push_back(b);
+            int Tmp = Inp[j] - '0';
+            Wheel[i].push_back(Tmp);
         }
     }
+    // 1은 시계방향 -1은 반시계방향
+    cin >> K;
+    for (int i = 0; i < K; i++)
+    {
+        int Num, Dir;
+        cin >> Num >> Dir;
+        Num = Num - 1;
+        vc.push_back({Num, Dir});
+    }
 
-    //input
+    Solution();
 
-    dfs(1, 0, 0);
-
-    if (ans == 987987987)
-        cout << -1 << "\n";
-    else
-        cout << ans << "\n";
 }
