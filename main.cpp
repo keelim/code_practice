@@ -39,64 +39,64 @@ int main(void)
             arr[i] = 0;
         for (int j = 0; j < Sc; j++)
             loop[j] = 0;
+
         cin >> oper;
         cin >> input;
         PairLoop();
-        int idx = 0, oper_idx = 0, input_idx = 0, max_oper_idx = 0;
+
+        int index = 0, oper_index = 0, input_index = 0, max_oper_index = 0;
         bool flag = false;
 
         for (int i = 1; i <= 50000000; i++)
         {
-            if (oper_idx >= Sc)
+            if (oper_index >= Sc)
             {
                 cout << "Terminates" << "\n";
                 flag = true;
                 break;
             }
-            if (oper[oper_idx] == '-')
+            if (oper[oper_index] == '-')
             {
-                arr[idx] = (arr[idx] - 1) < 0 ? 255 : arr[idx] - 1;
+                arr[index] = (arr[index] - 1) < 0 ? 255 : arr[index] - 1;
             }
-            else if (oper[oper_idx] == '+')
+            else if (oper[oper_index] == '+')
             {
-                arr[idx] = (arr[idx] + 1) % 256;
+                arr[index] = (arr[index] + 1) % 256;
             }
-            else if (oper[oper_idx] == '<')
+            else if (oper[oper_index] == '<')
             {
-                idx = idx - 1 < 0 ? Sm - 1 : idx - 1;
+                index = index - 1 < 0 ? Sm - 1 : index - 1;
             }
-            else if (oper[oper_idx] == '>')
+            else if (oper[oper_index] == '>')
             {
-                idx = (idx + 1) % Sm;
+                index = (index + 1) % Sm;
             }
-            else if (oper[oper_idx] == '[')
+            else if (oper[oper_index] == '[')
             {
-                if (arr[idx] == 0)
+                if (arr[index] == 0)
                 {
-                    oper_idx = loop[oper_idx];
+                    oper_index = loop[oper_index];
                 }
             }
-            else if (oper[oper_idx] == ']')
+            else if (oper[oper_index] == ']')
             {
-                if (arr[idx] != 0)
+                if (arr[index] != 0)
                 {
-                    oper_idx = loop[oper_idx];
+                    oper_index = loop[oper_index];
                 }
             }
-            else if (oper[oper_idx] == ',')
+            else if (oper[oper_index] == ',')
             {
-                int c = input_idx >= Si ? 255 : (int)input[input_idx];
-                arr[idx] = c;
-                input_idx = input_idx >= Si ? input_idx : input_idx + 1;
+                int c = input_index >= Si ? 255 : (int)input[input_index];
+                arr[index] = c;
+                input_index = input_index >= Si ? input_index : input_index + 1;
             }
-            oper_idx++;
-            max_oper_idx = oper_idx > max_oper_idx ? oper_idx : max_oper_idx;
+            oper_index++;
+            max_oper_index = oper_index > max_oper_index ? oper_index : max_oper_index;
         }
         if (!flag)
         {
-            cout << "Loops " << loop[max_oper_idx] << " " << max_oper_idx << "\n";
+            cout << "Loops " << loop[max_oper_index] << " " << max_oper_index << "\n";
         }
     }
-
-    return 0;
 }
