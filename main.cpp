@@ -1,30 +1,102 @@
 #include <iostream>
-#include <vector>
-#include <algorithm>
 using namespace std;
 
-int main()
+char oper[4097], input[4097];
+int stack[4097], arr[100001], loop[4097];
+int Sm, Sc, Si;
+
+void PairLoop()
+{
+    int top = -1;
+    for (int i = 0; i < Sc; i++)
+    {
+        if (oper[i] == '[')
+        {
+            stack[++top] = i;
+        }
+        else if (oper[i] == ']')
+        {
+            stack[++top] = i;
+            loop[stack[top]] = stack[top - 1];
+            loop[stack[top - 1]] = i;
+            top -= 2;
+        }
+    }
+}
+
+int main(void)
 {
     ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    cout.tie(NULL);
+    cin.tie(0);
+    cout.tie(0);
 
-    int temp;
-    vector<int> vc;
-    cin >> temp;
-    for (int i = 1; i <= temp; i++)
+    int T;
+    cin >> T;
+    while (T--)
     {
-        vc.push_back(i);
+        cin >> Sm >> Sc >> Si;
+        for (int i = 0; i < Sm; i++)
+            arr[i] = 0;
+        for (int j = 0; j < Sc; j++)
+            loop[j] = 0;
+        cin >> oper;
+        cin >> input;
+        PairLoop();
+        int idx = 0, oper_idx = 0, input_idx = 0, max_oper_idx = 0;
+        bool flag = false;
+
+        for (int i = 1; i <= 50000000; i++)
+        {
+            if (oper_idx >= Sc)
+            {
+                cout << "Terminates" << "\n";
+                flag = true;
+                break;
+            }
+            if (oper[oper_idx] == '-')
+            {
+                arr[idx] = (arr[idx] - 1) < 0 ? 255 : arr[idx] - 1;
+            }
+            else if (oper[oper_idx] == '+')
+            {
+                arr[idx] = (arr[idx] + 1) % 256;
+            }
+            else if (oper[oper_idx] == '<')
+            {
+                idx = idx - 1 < 0 ? Sm - 1 : idx - 1;
+            }
+            else if (oper[oper_idx] == '>')
+            {
+                idx = (idx + 1) % Sm;
+            }
+            else if (oper[oper_idx] == '[')
+            {
+                if (arr[idx] == 0)
+                {
+                    oper_idx = loop[oper_idx];
+                }
+            }
+            else if (oper[oper_idx] == ']')
+            {
+                if (arr[idx] != 0)
+                {
+                    oper_idx = loop[oper_idx];
+                }
+            }
+            else if (oper[oper_idx] == ',')
+            {
+                int c = input_idx >= Si ? 255 : (int)input[input_idx];
+                arr[idx] = c;
+                input_idx = input_idx >= Si ? input_idx : input_idx + 1;
+            }
+            oper_idx++;
+            max_oper_idx = oper_idx > max_oper_idx ? oper_idx : max_oper_idx;
+        }
+        if (!flag)
+        {
+            cout << "Loops " << loop[max_oper_idx] << " " << max_oper_idx << "\n";
+        }
     }
 
-    sort(vc.begin(), vc.end());
-
-    do
-    {
-        for (int i = 0; i < vc.size(); i++)
-        {
-            cout << vc[i] << " ";
-        }
-        cout << "\n";
-    } while (next_permutation(vc.begin(), vc.end()));
+    return 0;
 }
