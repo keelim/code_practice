@@ -1,69 +1,44 @@
 #include <iostream>
-#include <algorithm>
+#include <queue>
+#include <cstring>
 
 using namespace std;
+const int MAX = 1000 + 1;
+int N, M, V;
+int map[MAX][MAX];
+bool visited[MAX];
+queue<int> q;
+void dfs(int idx)
 
-int N, M, H, Answer;
-int MAP[11][30];
-bool Visit[11][30];
-
-
-bool Ladder_Game()
 {
+    cout << idx << " ";
     for (int i = 1; i <= N; i++)
-    {
-        int Current_Num = i;
-        for (int j = 1; j <= H; j++)
+        if (map[idx][i] && !visited[i])
         {
-            if (Visit[Current_Num][j] == true)
-                Current_Num = Current_Num + 1;
-            else if (Visit[Current_Num - 1][j] == true)
-                Current_Num = Current_Num - 1;
+            visited[i] = 1;
+            dfs(i);
         }
-
-        if (Current_Num != i)
-            return false;
-    }
-    return true;
 }
 
-void Select_Line(int Idx, int Cnt)
+void bfs(int idx)
 {
-    if (Cnt >= 4)
-        return;
-
-    if (Ladder_Game() == true)
+    q.push(idx);
+    visited[idx] = 1;
+    while (!q.empty())
     {
-        Answer = min(Answer, Cnt);
-        return;
+        idx = q.front();
+        q.pop();
+        cout << idx << " ";
+
+        //bfs는 해당 노드에 인접한 노드들을 모두 추가한 뒤 bfs 진행
+
+        for (int i = 1; i <= N; i++)
+            if (map[idx][i] && !visited[i])
+            {
+                visited[i] = 1;
+                q.push(i);
+            }
     }
-
-    for (int i = Idx; i <= H; i++)
-    {
-        for (int j = 1; j < N; j++)
-        {
-            if (Visit[j][i] == true)
-                continue;
-            if (Visit[j - 1][i] == true)
-                continue;
-            if (Visit[j + 1][i] == true)
-                continue;
-
-            Visit[j][i] = true;
-            Select_Line(i, Cnt + 1);
-            Visit[j][i] = false;
-        }
-    }
-}
-
-void Solution()
-{
-    Select_Line(1, 0);
-
-    if (Answer == 9999999)
-        Answer = -1;
-
-    cout << Answer << "\n";
 }
 
 int main(void)
@@ -71,15 +46,24 @@ int main(void)
     ios::sync_with_stdio(false);
     cin.tie(0);
     cout.tie(0);
-
-    Answer = 9999999;
-    cin >> N >> M >> H;
+    
+    cin >> N >> M >> V;
     for (int i = 0; i < M; i++)
     {
-        int a, b;
-        cin >> a >> b;
-        Visit[b][a] = true;
+        int first, second;
+        cin >> first >> second;
+        map[first][second] = 1;
+        map[second][first] = 1;
     }
 
-    Solution();
+    visited[V] = 1; //V에서 시작하므로
+
+    dfs(V);
+    cout << "\n";
+    
+    memset(visited, false, sizeof(visited));
+
+    bfs(V);
+    cout << "\n";
+
 }
