@@ -2,6 +2,12 @@
 #include <queue>
 
 using namespace std;
+const int MAX = 1000 + 1;
+int N, M, V;
+int map[MAX][MAX];
+bool visited[MAX];
+queue<int> q;
+void dfs(int idx)
 
 int map[1000001];
 bool visited[1000001];
