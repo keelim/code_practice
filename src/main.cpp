@@ -1,37 +1,19 @@
-#include <iostream>
+#include <string>
 #include <vector>
+#include <iostream>
+#include <algorithm>
+
 using namespace std;
-int n, b, c, answer = 0;
-vector<int> a;
 
-int main()
-{
-    cin >> n;
-    for (int i = 0; i < n; i++)
-        cin >> a[i];
-    
-    cin >> b >> c; //입력
+string solution(vector<string> participant, vector<string> completion) {
+    sort(participant.begin(), participant.end());
+    sort(completion.begin(), completion.end());
 
-    //한 시험장 총감독 1 v[i].size
-    // b 총감독 감시수
-    // c 부감독 감시수
-    // answer 총 감시수
+    int num = 0;
 
-    //총감독수 + answer
-    answer += a.size();
-    // vector 인원 빼기
-    // 부감독 수 구하기
-    for (int i = 0; i < n; i++)
-    {
-        a[i] -= b;
-        if (a[i] == 0)
-            continue;
-        answer += a[i] / c;   //몫
-        int temp2 = a[i] % c; //나머지
-        if (temp2 > 0)
-            answer++;
+    for(int i=0; i < participant.size(); i++){
+        if( participant[i] != completion[i]) return participant[i];
     }
 
-    cout << answer << "\n"; //출력
-    return 0;
+    return participant[participant.size()];
 }
