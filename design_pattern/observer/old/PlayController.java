@@ -1,4 +1,4 @@
-package design_pattern.observer;
+package design_pattern.observer.old;
 
 import java.util.Observable;
 

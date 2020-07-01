@@ -1,4 +1,4 @@
-package design_pattern.observer;
+package design_pattern.observer.old;
 
 public class MyClassB implements Observer{
     private boolean bPlay;
