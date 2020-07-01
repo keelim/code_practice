@@ -1,33 +1,47 @@
-#include <vector>
-#include <string>
-#include <algorithm>
-using namespace std;
+#include <iostream>
 
-//합친 문자 비교해서 큰순으로 정렬하기, ex ) 6, 10 이 있다면 610과 106하고 어떤게 큰지 비교
-// 610이 더크므로 6, 10순으로 정렬하게 된다.
-bool compare(string a, string b)
+using namespace std;
+// 전역 변수 잘 사용하기
+int n, count;
+int col[16];
+
+//배치 가능 여부
+bool promising(int a)
 {
-    return a + b > b + a;
+    int temp = 1;
+    bool flag = true;
+
+    while (temp < a && flag)
+    {
+        //같은 열이거나 대각선이라면 배치 못함
+        if (col[a] == col[temp] || abs(col[a] - col[temp]) == a - temp)
+            flag = false;
+        temp++;
+    }
+
+    return flag;
 }
 
-string solution(vector<int> numbers)
+void nqueen(int i)
 {
-    string answer = "";
-    vector<string> temp;
-    //string으로 바꾼후 벡터에 집어넣는다.
-    for (int num : numbers)
-        temp.push_back(to_string(num));
+    if (promising(i)) //==true 를 사용해도 된다.
+    {
+        //판 완성
+        if (i == n)
+            count++;
+        else
+            //해당 열 배치
+            for (int j = 1; j <= n; j++)
+            {
+                col[i + 1] = j;
+                nqueen(i + 1); //재귀 적으로 (백 트랙킹)
+            }
+    }
+}
 
-    //더할때 오름차순으로 정렬한다.
-    sort(temp.begin(), temp.end(), compare);
-
-    //처음 숫자가 0이라면 0을 반환
-    if (temp[0] == "0")
-        return "0";
-
-    //처음부터 끝까지 문자열 합치고 리턴
-    for (string num : temp)
-        answer += num;
-
-    return answer;
+int main(void)
+{
+    cin >> n;
+    nqueen(0);
+    cout << count << "\n";
 }
