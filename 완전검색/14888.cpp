@@ -4,7 +4,7 @@
 #define MAX 11
 using namespace std;
 
-int N;
+int n;
 int arr[MAX];
 int Plus, Minus, Multiple, Divide;
 int Operator_Num, maxVal, minVal;
@@ -42,12 +42,12 @@ int main(void)
     maxVal = -1000000001;
     minVal = 1000000001;
 
-    cin >> N;
-    for (int i = 0; i < N; i++)
+    cin >> n;
+    for (int i = 0; i < n; i++)
         cin >> arr[i];
 
     cin >> Plus >> Minus >> Multiple >> Divide;
-    Operator_Num = N - 1;
+    Operator_Num = n - 1;
 
     solution();
 }
