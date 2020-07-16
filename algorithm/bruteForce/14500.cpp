@@ -2,7 +2,7 @@
 #include <algorithm>
 using namespace std;
 
-int n, m, ans;
+int n, m, answer;
 int map[501][501];
 bool visited[501][501] = {
     false,
@@ -22,7 +22,7 @@ void dfs(int x, int y, int cnt, int sum)
     // 테트로미노를 만든 경우
     if (cnt == 4)
     {
-        ans = max(ans, sum);
+        answer = max(answer, sum);
         return;
     }
 
@@ -67,7 +67,7 @@ void getExceptionCase(int x, int y)
         }
 
         if (flag)
-            ans = max(ans, sum);
+            answer = max(answer, sum);
     }
 }
 
@@ -82,7 +82,7 @@ int main()
             cin >> map[i][j];
         }
     } //입력
-    ans = 0;
+    answer = 0;
 
     for (int i = 0; i < n; i++)
     {
@@ -97,4 +97,4 @@ int main()
         }
     }
 
-    cout << ans << "\n";
+    cout << answer << "\n";

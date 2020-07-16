@@ -128,7 +128,7 @@ void moveRight()
     {
         for (int j = n - 1; j > 0; j--)
         {
-            bool Check = false;
+            bool check = false;
             if (cmap[i][j] == 0)
             {
                 int k = j - 1;
@@ -136,12 +136,12 @@ void moveRight()
                 {
                     if (cmap[i][k] != 0)
                     {
-                        Check = true;
+                        check = true;
                         break;
                     }
                     k--;
                 }
-                if (Check == true)
+                if (check == true)
                 {
                     cmap[i][j] = cmap[i][k];
                     cmap[i][k] = 0;
@@ -263,7 +263,7 @@ void moveDown()
     {
         for (int j = 0; j < n; j++)
         {
-            bool Check = false;
+            bool check = false;
             if (cmap[i][j] == 0)
             {
                 int k = i - 1;
@@ -271,12 +271,12 @@ void moveDown()
                 {
                     if (cmap[k][j] != 0)
                     {
-                        Check = true;
+                        check = true;
                         break;
                     }
                     k--;
                 }
-                if (Check == true)
+                if (check == true)
                 {
                     cmap[i][j] = cmap[k][j];
                     cmap[k][j] = 0;

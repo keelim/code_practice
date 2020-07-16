@@ -8,12 +8,12 @@ int n, l;
 int map[MAX][MAX];
 int cmap[MAX][MAX];
 
-bool canMakeRoad(int A[][MAX], int x, int y)
+bool canMakeRoad(int a[][MAX], int x, int y)
 {
-    int standard = A[x][y + 1];
+    int standard = a[x][y + 1];
     for (int j = y + 1; j < y + 1 + l; j++)
     {
-        if (A[x][j] != standard)
+        if (a[x][j] != standard)
             return false;
     }
     return true;
@@ -30,8 +30,8 @@ int makeRoad(int A[][MAX])
         for (int j = 0; j < n - 1; j++)
         {
             if (A[i][j] == A[i][j + 1])
-                beforeRoad++; 
-                                  // 1번 Case
+                beforeRoad++;
+            // 1번 Case
             else if (A[i][j] == A[i][j + 1] + 1) // 2번 Case 앞에것이 더 높을 때
             {
                 if (canMakeRoad(A, i, j) == true)
@@ -72,14 +72,6 @@ int makeRoad(int A[][MAX])
     return totalRoad;
 }
 
-void solution()
-{
-    int A = makeRoad(map);
-    int B = makeRoad(cmap);
-
-    cout << A + B << "\n";
-}
-
 int main()
 {
 
@@ -93,5 +85,8 @@ int main()
         }
     } //input
 
-    solution();
+    int a = makeRoad(map);
+    int b = makeRoad(cmap);
+
+    cout << a + b << "\n";
 }

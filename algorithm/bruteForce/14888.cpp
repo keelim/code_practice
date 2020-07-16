@@ -9,25 +9,25 @@ int arr[MAX];
 int Plus, Minus, Multiple, Divide;
 int Operator_Num, maxVal, minVal;
 
-void DFS(int pi, int mi, int mul, int div, int Sum, int idx, int cnt)
+void DFS(int pi, int mi, int mul, int div, int sum, int idx, int cnt)
 {
     if (cnt == Operator_Num)
     {
-        if (maxVal < Sum)
-            maxVal = Sum;
-        if (minVal > Sum)
-            minVal = Sum;
+        if (maxVal < sum)
+            maxVal = sum;
+        if (minVal > sum)
+            minVal = sum;
         return;
     }
 
     if (pi < Plus)
-        DFS(pi + 1, mi, mul, div, Sum + arr[idx], idx + 1, cnt + 1);
+        DFS(pi + 1, mi, mul, div, sum + arr[idx], idx + 1, cnt + 1);
     if (mi < Minus)
-        DFS(pi, mi + 1, mul, div, Sum - arr[idx], idx + 1, cnt + 1);
+        DFS(pi, mi + 1, mul, div, sum - arr[idx], idx + 1, cnt + 1);
     if (mul < Multiple)
-        DFS(pi, mi, mul + 1, div, Sum * arr[idx], idx + 1, cnt + 1);
+        DFS(pi, mi, mul + 1, div, sum * arr[idx], idx + 1, cnt + 1);
     if (div < Divide)
-        DFS(pi, mi, mul, div + 1, Sum / arr[idx], idx + 1, cnt + 1);
+        DFS(pi, mi, mul, div + 1, sum / arr[idx], idx + 1, cnt + 1);
 }
 
 void solution()

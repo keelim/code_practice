@@ -5,32 +5,29 @@ using namespace std;
 
 int main()
 {
-    ios::sync_with_stdio(0);
-    cin.tie(0);
-    cout.tie(0);
 
     int n, b, c;
     cin >> n;
-    vector<int> a;
+    vector<int> vc;
 
     for (int i = 0; i < n; i++)
-        cin >> a[i];
+        cin >> vc[i];
 
     cin >> b >> c;
 
     long long answer = 0;
     for (int i = 0; i < n; i++)
     {
-        a[i] -= b;
+        vc[i] -= b;
         answer++;
-        if (a[i] <= 0)
+        if (vc[i] <= 0)
             continue;
 
-        if (a[i] % c > 0)
+        if (vc[i] % c > 0)
             answer++;
 
-        answer += a[i] / c;
+        answer += vc[i] / c;
     }
-    
+
     cout << answer << "\n";
 }
