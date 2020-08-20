@@ -12,7 +12,7 @@ struct CHESS
     int dir;
 };
 
-int N, K, Answer;
+int n, K, Answer;
 int MAP[MAX][MAX];
 vector<int> MAP_State[MAX][MAX];
 CHESS Chess[CHESS_MAX];
@@ -81,7 +81,7 @@ void MoveChess(int x, int y, int nx, int ny, int Chess_Num, int Pos, int Ms)
         int nnx = x + dx[Dir];
         int nny = y + dy[Dir];
 
-        if (nnx >= 0 && nny >= 0 && nnx < N && nny < N)
+        if (nnx >= 0 && nny >= 0 && nnx < n && nny < n)
         {
             if (MAP[nnx][nny] != 2)
                 MoveChess(x, y, nnx, nny, Chess_Num, Pos, MAP[nnx][nny]);
@@ -114,10 +114,10 @@ bool Check_State()
 int main()
 {
 
-    cin >> N >> K;
-    for (int i = 0; i < N; i++)
+    cin >> n >> K;
+    for (int i = 0; i < n; i++)
     {
-        for (int j = 0; j < N; j++)
+        for (int j = 0; j < n; j++)
         {
             cin >> MAP[i][j];
         }
@@ -149,7 +149,7 @@ int main()
             int ny = y + dy[dir];
 
             int Pos = Find_Position(x, y, i);
-            if (nx >= 0 && ny >= 0 && nx < N && ny < N)
+            if (nx >= 0 && ny >= 0 && nx < n && ny < n)
                 MoveChess(x, y, nx, ny, i, Pos, MAP[nx][ny]);
             else
                 MoveChess(x, y, nx, ny, i, Pos, 2);

@@ -3,54 +3,60 @@
 
 using namespace std;
 
-int N, M;
-char map[101][101];
-bool visit[101][101];
-int dx[4] = {1, -1, 0, 0};    //동 서 남 북
-int dy[4] = {0, 0, -1, 1};    //동 서 남 북
+#define MAX 1001
 
-int bfs() {
-    queue<pair<pair<int, int>, int>> q;
-    q.push(make_pair(make_pair(0, 0), 1));    //첫째pair 위치, 둘째pair 움직인거리
-    visit[0][0] = 1;
+int n, m;
+int cnt;
+int map[MAX][MAX];
+bool visited[MAX][MAX];
+int dx[4] = { 1 , -1, 0, 0 };
+int dy[4] = { 0, 0, 1, -1 };
 
-    while (!q.empty()) {
-        int x = q.front().first.second;
-        int y = q.front().first.first;
-        int z = q.front().second;
+queue <pair <pair<int, int>, int>> q;
 
-        q.pop();
 
-        if (x == M - 1 && y == N - 1)
-            return z;
-
-        for (int i = 0; i < 4; i++) {
-            int nx = x + dx[i];
-            int ny = y + dy[i];
-
-            if (nx < 0 || ny < 0 || nx >= M || ny >= N)
-                continue;
-
-            if (visit[ny][nx] == 1)
-                continue;
-                
-            if (map[ny][nx] != '1')
-                continue;
-
-            q.push(make_pair(make_pair(ny, nx), z + 1));
-            visit[ny][nx] = 1;
-        }
-    }
-}
 
 int main() {
+	
+	cin >> n >> m;
 
-    cin >> N >> M;
+	for (int i = 0; i < m; i++) {
+		for (int j = 0; j < n; j++) {
+			cin >> map[i][j];
+			if (map[i][j] == 1) {
+				visited[i][j] = true;
+				q.push(make_pair(make_pair(i, j), 0));
+			}
+		}
+	}
 
-    for (int i = 0; i < N; i++) {
-        cin >> map[i];
-    }
-    cout << bfs();
+	while (!q.empty()) {
+		int x = q.front().first.first;
+		int y = q.front().first.second;
+		cnt = q.front().second;
 
-    return 0;
+		q.pop();
+		for (int i = 0; i < 4; i++) {
+			int nx = x + dx[i];
+			int ny = y + dy[i];
+
+			if (nx < 0 || nx >= m || ny < 0 || ny >= n)	continue;
+			if (map[nx][ny] == 0 && !visited[nx][ny]) {
+				
+				visited[nx][ny] = true;
+				q.push(make_pair(make_pair(nx, ny), cnt + 1));
+			}
+		}
+	}
+
+	for (int i = 0; i < m; i++) {
+		for (int j = 0; j < n; j++) {
+			if (map[i][j] == 0 && !visited[i][j]) {
+				cnt = -1; break;
+			}
+		}
+	}
+
+	cout << cnt;
+	return 0;
 }
