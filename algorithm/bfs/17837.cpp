@@ -12,7 +12,11 @@ struct CHESS
     int dir;
 };
 
+<<<<<<< HEAD
 int n, k, Answer;
+=======
+int n, K, Answer;
+>>>>>>> e782372d2c0c4e87c143f9305c7904f06b0a1f99
 int MAP[MAX][MAX];
 vector<int> MAP_State[MAX][MAX];
 CHESS Chess[CHESS_MAX];
@@ -114,7 +118,11 @@ bool Check_State()
 int main()
 {
 
+<<<<<<< HEAD
     cin >> n >> k;
+=======
+    cin >> n >> K;
+>>>>>>> e782372d2c0c4e87c143f9305c7904f06b0a1f99
     for (int i = 0; i < n; i++)
     {
         for (int j = 0; j < n; j++)
