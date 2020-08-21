@@ -6,7 +6,7 @@ using namespace std;
 
 int r, c, t, answer;
 int map[MAX][MAX];
-int cmap[MAX][MAX];
+int wmap[MAX][MAX];
 
 int dx[] = {0, 0, 1, -1};
 int dy[] = {1, -1, 0, 0};
@@ -25,7 +25,7 @@ void copyMap(int a[][MAX], int b[][MAX])
 
 void dust()
 {
-    copyMap(cmap, map);
+    copyMap(wmap, map);
     for (int i = 0; i < r; i++)
     {
         for (int j = 0; j < c; j++)
@@ -44,15 +44,15 @@ void dust()
 
                     if (map[nx][ny] != -1)
                     {
-                        cmap[nx][ny] = cmap[nx][ny] + value;
+                        wmap[nx][ny] = wmap[nx][ny] + value;
                         virusCount++;
                     }
                 }
-                cmap[i][j] -= (virusCount * value);
+                wmap[i][j] -= (virusCount * value);
             }
         }
     }
-    copyMap(map, cmap);
+    copyMap(map, wmap);
 }
 
 void moveDust()
