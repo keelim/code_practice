@@ -98,3 +98,5 @@ int main()
     }
 
     cout << answer << "\n";
+
+    //블록을 하나 놓고ㄱ 계산
