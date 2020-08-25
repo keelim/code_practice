@@ -12,7 +12,7 @@ int main(){
 using namespace std;
 #define MAX_VALUE 100001 //인덱스 100000까지 :: +1까지 넣음
 bool visited[MAX_VALUE];
-int N, M; //N    수빈이위치, M 동생위치
+int n, M; //N    수빈이위치, M 동생위치
 
 int bfs(int nx, int m)
 {
