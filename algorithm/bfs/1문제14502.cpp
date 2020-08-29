@@ -1,80 +1,105 @@
 #include <iostream>
+#include <algorithm>
 #include <queue>
+#include <tuple>
+
 using namespace std;
+
+pair<int, int> moveDir[4] = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
+
 int n, m;
-int a[10][10];
-int b[10][10];
-int dx[] = {0,0,1,-1};
-int dy[] = {1,-1,0,0};
-int bfs() {
-    queue<pair<int,int>> q;
-    for (int i=0; i<n; i++) {
-        for (int j=0; j<m; j++) {
-            b[i][j] = a[i][j];
-            if (b[i][j] == 2) {
-                q.push(make_pair(i,j));
-            }
-        }
-    }
-    while (!q.empty()) {
-        int x = q.front().first;
-        int y = q.front().second;
+int lab[8][8];
+int map[8][8];
+int spread[8][8];
+
+int result;
+
+void bfs()
+{
+
+    for (int i = 0; i < n; i++)
+        for (int j = 0; j < m; j++)
+            spread[i][j] = map[i][j];
+
+    queue<pair<int, int>> q; //y, x
+
+    for (int i = 0; i < n; i++)
+        for (int j = 0; j < m; j++)
+            if (spread[i][j] == 2)       //바이러스라면
+                q.push(make_pair(i, j)); //큐에 넣는다
+
+    while (!q.empty())
+    {
+        int x, y;
+        tie(x, y) = q.front();
         q.pop();
-        for (int k=0; k<4; k++) {
-            int nx = x+dx[k];
-            int ny = y+dy[k];
-            if (0 <= nx && nx < n && 0 <= ny && ny < m) {
-                if (b[nx][ny] == 0) {
-                    b[nx][ny] = 2;
-                    q.push(make_pair(nx,ny));
-                }
+        for (int i = 0; i < 4; i++)
+        {
+            int nx = x + moveDir[i].first;
+            int ny = y + moveDir[i].second;
+            if (0 > nx || 0 > ny || nx >= n || ny >= m)
+                continue;
+
+            if (spread[nx][ny] == 0) //빈칸이라면
+            {
+                spread[nx][ny] = 2; //바이러스 감염
+                q.push(make_pair(nx, ny));
             }
         }
     }
-    int cnt = 0;
-    for (int i=0; i<n; i++) {
-        for (int j=0; j<m; j++) {
-            if (b[i][j] == 0) {
-                cnt += 1;
-            }
-        }
-    }
-    return cnt;
+
+    int empty = 0;
+
+    //빈칸 세기
+
+    for (int i = 0; i < n; i++)
+        for (int j = 0; j < m; j++)
+            if (spread[i][j] == 0)
+                empty++;
+
+    result = max(result, empty);
 }
-int main() {
-    cin >> n >> m;
-    for (int i=0; i<n; i++) {
-        for (int j=0; j<m; j++) {
-            cin >> a[i][j];
-        }
+
+void wall(int cnt)
+{
+    if (cnt == 3) //벽을 세개 만들었으므로
+    {
+        bfs();
+        return;
     }
-    int ans = 0;
-    for (int x1=0; x1<n; x1++) {
-        for (int y1=0; y1<m; y1++) {
-            if (a[x1][y1] != 0) continue;
-            for (int x2=0; x2<n; x2++) {
-                for (int y2=0; y2<m; y2++) {
-                    if (a[x2][y2] != 0) continue;
-                    for (int x3=0; x3<n; x3++) {
-                        for (int y3=0; y3<m; y3++) {
-                            if (a[x3][y3] != 0) continue;
-                            if (x1 == x2 && y1 == y2) continue;
-                            if (x1 == x3 && y1 == y3) continue;
-                            if (x2 == x3 && y2 == y3) continue;
-                            a[x1][y1] = 1;
-                            a[x2][y2] = 1;
-                            a[x3][y3] = 1;
-                            int cur = bfs();
-                            if (ans < cur) ans = cur;
-                            a[x1][y1] = 0;
-                            a[x2][y2] = 0;
-                            a[x3][y3] = 0;
-                        }
-                    }
-                }
+
+    for (int i = 0; i < n; i++)
+        for (int j = 0; j < m; j++)
+            if (map[i][j] == 0)
+            {
+                map[i][j] = 1; //마찬가지로 해당칸에 새우고
+                wall(cnt + 1);
+                map[i][j] = 0; //다시 허문다
             }
-        }
-    }
-    cout << ans << '\n';
+}
+
+int main(void)
+{
+    cin >> n >> m;
+    for (int i = 0; i < n; i++)
+        for (int j = 0; j < m; j++)
+            cin >> lab[i][j];
+
+    for (int i = 0; i < n; i++)
+        for (int j = 0; j < m; j++)
+            if (lab[i][j] == 0) //빈칸 발견 시
+            {
+                //연구실 상태를 복사한다
+                for (int k = 0; k < n; k++)
+                    for (int l = 0; l < m; l++)
+                        map[k][l] = lab[k][l];
+
+                map[i][j] = 1; //해당 칸에 벽을 세운다
+                wall(1);       //벽을 세운 상태이므로 cnt = 1
+                map[i][j] = 0; //다시 허문다
+            }
+
+    cout << result << endl;
+
     return 0;
 }

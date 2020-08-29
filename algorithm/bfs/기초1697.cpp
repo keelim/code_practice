@@ -26,7 +26,7 @@ int main()
             }
         }
         if (now + 1 < MAX)
-        {
+        {81
             if (check[now + 1] == false)
             {
                 q.push(now + 1);
