@@ -1,12 +1,32 @@
 #include <string>
 #include <vector>
+#include <iostream>
 
 using namespace std;
 
-long long solution(int n, vector<vector<int>> products) {
-    long long answer = 0;
+string solution(string s, int n)
+{
+    string answer = "";
 
-    int sel;
-    for(int i=0; i<)
+    for (int i = 0; i < s.size(); i++)
+    {
+        char c = s[i];
+        c += n;
+        if (c > 'Z')
+        {
+            c -= 'Z';
+        }
+        else if (c > 'z')
+        {
+            c -= 'z';
+        }
+        else if (c == ' ')
+        {
+            continue;
+        }
+        s[i] = c;
+    }
+
+    cout << s;
     return answer;
 }

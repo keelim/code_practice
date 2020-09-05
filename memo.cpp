@@ -1,63 +1,59 @@
 #include <iostream>
-#include <queue>
-#include <tuple>
+#include <algorithm>
 
 using namespace std;
 
-int n, m;
-int cnt;
-int map[1001][1001];
-bool visited[1001][1001];
-int dx[4] = {1, -1, 0, 0};
-int dy[4] = {0, 0, 1, -1};
+int map[21][21];
+bool visited[21];
 
-queue<tuple<int, int, int>> q;
+int n;
+int ans = 999999999;
+
+void dfs(int index, int cnt)
+{
+    if (cnt == n / 2)
+    {
+        int a = 0;
+        int b = 0;
+
+        for (int i = 0; i < n; i++)
+        { // 다시 순황을 하는 구나
+            for (int j = i + 1; j < n; j++)
+            {
+                if (visited[i] && visited[j])
+                {
+                    a += map[i][j];
+                    a += map[j][i];
+                }
+                else if (!visited[i] && !visited[j])
+                {
+                    b += map[i][j];
+                    b += map[j][i];
+                }
+            }
+        }
+        ans = min(ans, abs(a - b));
+    }
+
+    for (int i = 0; i < n; i++)
+    {
+        if (visited[i])
+            continue;
+        visited[i] = 1;
+        dfs(i, cnt + 1);
+        visited[i] = 0; //조합을 구하는 방법
+    }
+}
 
 int main()
 {
-    cin >> n >> m;
+    cin >> n;
 
-    for (int i = 0; i < m; i++)
+    for (int i = 0; i < n; i++)
         for (int j = 0; j < n; j++)
-        {
             cin >> map[i][j];
-            if (map[i][j] == 1)
-            {
-                visited[i][j] = true;
-                q.push(make_tuple(i, j, 0));
-            }
-        }
 
-    while (!q.empty())
-    {
-        int x, y;
-        tie(x, y, cnt) = q.front();
-        q.pop();
-
-        for (int i = 0; i < 4; i++)
-        {
-            int nx = x + dx[i];
-            int ny = y + dy[i];
-
-            if (nx < 0 || nx >= m || ny < 0 || ny >= n)
-                continue;
-            if (map[nx][ny] == 0 && !visited[nx][ny])
-            {
-                visited[nx][ny] = 1;
-                q.push(make_tuple(nx, ny, cnt + 1));
-            }
-        }
-    }
-
-    for (int i = 0; i < m; i++)
-        for (int j = 0; j < n; j++)
-            if (map[i][j] == 0 && !visited[i][j])
-            {
-                cnt = -1;
-                break;
-            }
-        
-
-    cout << cnt;
+    dfs(0, 0);
+    cout << ans << endl;
     return 0;
 }
