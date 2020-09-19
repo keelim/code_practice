@@ -1,43 +1,47 @@
 #include <iostream>
-#include <vector>
+#include <tuple>
 #include <queue>
 
 using namespace std;
 
-vector<vector<int> > map;
-vector<bool> visited;
-int n, m;
-int u, v;
+int time = 0;
+bool visited[200001][2];
 
-void bfs(int a) { //인접 행렬 보다는 인접 그래프가 좋다.
-    //하지만 행렬이면 다른 방식으로 쓸수는 있다.
-    queue<int> q;
-    q.push(a);
-    visited[a] = true;
+int solve(int cPosition, int bPosition) {
+    queue <pair<int, int>> q;
+    q.push(make_pair(bPosition, 0));
 
-    while (!q.empty()) {
-        int x = q.front();
-        q.pop();
-        cout << x << ' '; //현재 원소
+    while (1) {
+        cPosition += time;
 
-        for (int i = 0; i < map[x].size(); i++) {
-            int nx = map[x][i];
+        if (cPosition > 200000) return -1;
+        if (visited[cPosition][time % 2]) return time;
 
-            if (!visited[nx]) {
-                visited[nx] = true;
-                q.push(nx);
+        for (int i = 0, size = q.size(); i < size; i++) {
+            int currentPosition = q.front().first;
+            int newTime = (q.front().second + 1) % 2;
+            int newPosition;
+            q.pop();
+
+            newPosition = currentPosition - 1;
+            if (newPosition >= 0 && !visited[newPosition][newTime]) {
+                visited[newPosition][newTime] = true;
+                q.push(make_pair(newPosition, newTime));
+            }
+
+            newPosition = currentPosition + 1;
+            if (newPosition < 200001 && !visited[newPosition][newTime]) {
+                visited[newPosition][newTime] = true;
+                q.push(make_pair(newPosition, newTime));
+            }
+
+            newPosition = currentPosition * 2;
+            if (newPosition < 200001 && !visited[newPosition][newTime]) {
+                visited[newPosition][newTime] = true;
+                q.push(make_pair(newPosition, newTime));
             }
         }
-    }
-}
 
-int main() {
-    cin >> n >> m;
-    map.resize(n + 1);
-    visited.resize(n + 1);
-    for (int i = 0; i < m; i++) {
-        cin >> u >> v;
-        map[u].push_back(v);
+        time++;
     }
-    bfs(1);
 }
