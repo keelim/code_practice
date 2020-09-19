@@ -13,8 +13,8 @@ public class TestPattern2 {
                 e.printStackTrace();
             }
             for(int i=0; i<10; i++){
-                Thread t = new Thread(task);
-                t.start();
+                Thread time = new Thread(task);
+                time.start();
             }
         }
 

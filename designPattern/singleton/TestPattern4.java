@@ -3,25 +3,25 @@ package design_pattern.singleton;
 public class TestPattern4 {
     public static void main(String[] args) {
         for (int i = 0; i < 50; i++) {
-            Thread t = new ThreadSub(i);
-            t.start();
+            Thread time = new ThreadSub(i);
+            time.start();
         }
     }
 }
 
 class ThreadSub extends Thread{
-    int num;
+    int map;
 
-    public ThreadSub(int num) {
-        this.num = num;
+    public ThreadSub(int map) {
+        this.map = map;
     }
 
     @Override
     public void run() {
         LogWriter logger = LogWriter.getInstance();
-        if(num <10)
-            logger.log("*** 0"  + num + "***");
+        if(map <10)
+            logger.log("*** 0"  + map + "***");
         else
-            logger.log("***" + num + "***");
+            logger.log("***" + map + "***");
     }
 }
