@@ -1,44 +1,31 @@
 #include <iostream>
-#include <algorithm>
+#include <vector>
 
 using namespace std;
 
-#define MAX 5001
+vector<vector<int> > map;
+vector<bool> visited;
+int n, m;
+int u, v;
 
-int d[MAX], n;
-
-bool binarySearch(int a) {
-
-    int l = 0, r = n - 1; // 투 포인터 알고리즘으로
-
-    while (l <= r) {
-        int mid = (l + r) / 2;
-
-        if (a == d[mid]) return true;
-        else if (a > d[mid]) l = mid + 1;
-        else r = mid - 1;
+void dfs(int cur) {
+    visited[cur] = true;
+    cout << cur << ' ';
+    for (int i = 0; i < map[cur].size(); i++) {
+        int next = map[cur][i];
+        if (visited[next]) continue;
+        dfs(next);
     }
-
-    return false;
 }
 
 int main() {
-    cin>>n;
+    cin >> n >> m;
+    map.resize(n + 1);
+    visited.resize(n + 1); //visited = vector<bool> ();
 
-    for (int i = 0; i < n; i++)
-        cin >> d[i];
-
-    sort(d, d + n); //배열 하고 벡터는 다릅니다.
-
-    int t;
-
-    cin >> t;
-
-    while (t--) {
-        int x;
-        cin >> x;
-
-        if (binarySearch(x)) cout << "exist" << endl;
-        else cout << "not exist" << endl;
+    for (int i = 0; i < m; i++) {
+        cin >> u >> v;
+        map[u].push_back(v);
     }
+    dfs(1);
 }
