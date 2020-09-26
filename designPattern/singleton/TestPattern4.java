@@ -10,18 +10,18 @@ public class TestPattern4 {
 }
 
 class ThreadSub extends Thread{
-    int map;
+    int mapp;
 
-    public ThreadSub(int map) {
-        this.map = map;
+    public ThreadSub(int mapp) {
+        this.mapp = mapp;
     }
 
     @Override
     public void run() {
         LogWriter logger = LogWriter.getInstance();
-        if(map <10)
-            logger.log("*** 0"  + map + "***");
+        if(mapp <10)
+            logger.log("*** 0"  + mapp + "***");
         else
-            logger.log("***" + map + "***");
+            logger.log("***" + mapp + "***");
     }
 }
