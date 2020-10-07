@@ -5,7 +5,7 @@ public class TestPattern3 {
         FlyweightFactory flyweightFactory = new FlyweightFactory();
         flyweightFactory.getSubject("mapp");
         flyweightFactory.getSubject("mapp");
-        flyweightFactory.getSubject("start");
-        flyweightFactory.getSubject("start");
+        flyweightFactory.getSubject("n");
+        flyweightFactory.getSubject("n");
     }
 }

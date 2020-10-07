@@ -20,12 +20,12 @@ int main() {
 
     for (int i = 1; i <= n; i++) dist[i] = 987654321;                          // 초기값 설정은 불가능을 나타내는 이상치로 설정
 
-    priority_queue<pair<int, int>> pq;
+    priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
     pq.emplace(0, start);                    // 우선순위 큐 선언해주고 시작점부터 계산시작
     dist[start] = 0;
 
     while (!pq.empty()) {
-        int cost = -pq.top().first;                         // 해당 도시까지의 최단거리값 저장해놓음
+        int cost = pq.top().first;                         // 해당 도시까지의 최단거리값 저장해놓음
         int x = pq.top().second;                          // 이번에 검사할 도시와
         pq.pop();
 
@@ -38,7 +38,7 @@ int main() {
             if (dist[nx] > cost + ncost)           // 다른 도시들 중 최단거리 갱신할 수 있는 도시가 있다면
             {
                 dist[nx] = cost + ncost;          // 업데이트 해주고
-                pq.emplace(-dist[nx], nx);  // 큐에 넣어줌 (거리에 - 를 붙여 최단거리 확인)
+                pq.emplace(dist[nx], nx);  // 큐에 넣어줌 (거리에 - 를 붙여 최단거리 확인)
             }
         }
     }

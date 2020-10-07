@@ -14,7 +14,7 @@ public class TestPattern2 {
             }
             for(int i=0; i<10; i++){
                 Thread time = new Thread(task);
-                time.start();
+                time.n();
             }
         }
 
