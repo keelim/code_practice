@@ -52,8 +52,8 @@ public class PersonBuilder { //기본적인
         return this;
     }
 
-    public Person build(){
-        Person person = new Person();
+    public person build(){
+        person person = new person();
         person.setFirstName(this.firstName);
         person.setLastName(this.lastName);
         person.setAddressOne(this.addressOne);
