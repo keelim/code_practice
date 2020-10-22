@@ -1,25 +1,20 @@
-#include <iostream>
 #include <string>
+#include <vector>
+
 using namespace std;
-string a, b;
 
-void go(int index, int cnt){
-    if(a==b){
-        
-        return ;
+string solution(int n) {
+    string answer = "";
+    int temp;
+
+    while (n > 0)
+    {
+        temp = n % 3;
+        if (temp == 0) n = (n / 3) - 1;
+        else n /= 3;
+
+        answer = "412"[temp] + answer;
     }
 
-
-
-}
-int main(){
-    int testcase;
-    cin>>testcase;
-    while(testcase--){
-        cin>>a>>b;
-        go(0,0);
-
-
-    }
-    return 0;
+    return answer;
 }

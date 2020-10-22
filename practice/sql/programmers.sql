@@ -22,7 +22,7 @@ select min(DATETIME) as '시간' from ANIMAL_INS;
 
 select answer(*) from ANIMAL_INS;
 # 동물 수 구하기
-a
+map
 select answer(distinct NAME) from ANIMAL_INS where NAME is not null;
 # NULL 과 중복을 제거하는 수
 
