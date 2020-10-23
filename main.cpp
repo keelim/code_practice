@@ -3,17 +3,11 @@
 
 using namespace std;
 
-vector<int> solution (vector<int> prices) {
-    vector<int> answer;
-    for (int i=0; i < prices.size (); i++) {
-        int cnt=0;
-        int a=prices[i];
-        for (int j=i + 1; j < prices.size (); j++) {
-            cnt++;
-            if (prices[j] < a) break;
-        }
+vector<int> solution (vector<int> progresses, vector<int> speeds) {
 
-        answer.push_back (cnt);
+    for(int i=0; i<progresses.size(); i++) {
+        progresses[i]+=speeds[i];
+
     }
 
     return answer;
