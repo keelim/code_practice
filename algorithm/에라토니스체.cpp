@@ -50,3 +50,18 @@ int main1(){
     }
 
 }
+
+int main2() {
+
+    cin >> n;
+
+    for (int i=2; i * i <= n; i++) { //소수를 구하는 방법
+        while (n % i == 0) {
+            cout << i << '\n';
+            n/=i;
+        }
+    }
+
+    if (n > 1) cout << n << '\n';
+    return 0;
+}
