@@ -2,7 +2,7 @@ package design_pattern.builder;
 
 import java.time.LocalDate;
 
-public class Person {
+public class person {
     private String firstName;
     private String lastName;
     private LocalDate birthDate;

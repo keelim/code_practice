@@ -2,9 +2,9 @@ package design_pattern.builder;
 
 public class TestPattern1 {
     public static void main(String[] args) {
-        Person p1 = createPersonForTesting();
+        person p1 = createPersonForTesting();
         System.out.println(p1.getFirstName());
-        Person p2 = Person.personBuilder()
+        person p2 = person.personBuilder()
                 .FirstName("sdsd")
                 .AddressOne("aaa")
                 .LastName("sdsd")
@@ -16,8 +16,8 @@ public class TestPattern1 {
 
     }
 
-    public static Person createPersonForTesting() { //기존 getter, setter
-        Person person = new Person();
+    public static person createPersonForTesting() { //기존 getter, setter
+        person person = new person();
         person.setFirstName("FirstName");
         person.setLastName("LastName");
         person.setAddressOne("Address1");

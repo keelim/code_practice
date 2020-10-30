@@ -5,6 +5,6 @@ public class TestPattern2 {
         DatabaseUse myDb = new DatabaseUse();
 
         myDb.connect(DBTYPE.mysql);
-        myDb.select();
+        myDb.go();
     }
 }

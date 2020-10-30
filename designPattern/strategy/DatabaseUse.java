@@ -21,7 +21,7 @@ public class DatabaseUse {
         }
     }
 
-    public void select(){
+    public void go(){
         db.selectData();
     }
 }
