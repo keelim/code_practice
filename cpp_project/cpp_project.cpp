@@ -1,44 +1,31 @@
 ﻿#include <iostream>
-#include <queue>
+#include <string>
 #include <vector>
+
 using namespace std;
+vector<int> number;
+int t;
+int s=0;
+void go (int index, int sum) {
+    if (index == number.size ()) {
+        if (sum == t) s+=1;
+    }
 
-int answer = 0;
+    if (index >=number.size ()) return;
 
-int main(void) {
-	int n, length, weight, t;
-	cin >> n >> length >> weight;
-	int answer = 0;
-	queue<pair<int, int>> q;
-	vector<int> waiting_trucks(n);
-	vector<int> arrived_trucks;
-	int sum = 0;
-	
-	for (int i = 0; i < n; i++)  cin >> waiting_trucks[i];
-	
+    go (index + 1, sum + number[index]);
+    go (index + 1, sum - number[index]);
+}
 
-	while (arrived_trucks.size() < n) {
-		answer+=1;
-		int front_truck = 0;
+int solution (vector<int> numbers, int target) {
+    number=numbers;
+    t=target;
 
-		if (!q.empty()) {
-			if (q.front().second == answer) {
-				int z = q.front().first;
-				arrived_trucks.push_back(z);
-				sum -= z;
-				q.pop();
-			}
-		}
-		if (waiting_trucks.size() > 0) {
-			front_truck = waiting_trucks.front();
-			if (sum + front_truck <= weight) {
-				sum += front_truck;
-				waiting_trucks.pop();
-				q.push(make_pair(front_truck, answer + length));
-			}
-		}
+    go (0, 0);
 
-	}
-	cout << answer;
+    return s;
+}
 
+int main () {
+    cout<<solution ({ 1, 1, 1, 1, 1 }, 3);
 }
